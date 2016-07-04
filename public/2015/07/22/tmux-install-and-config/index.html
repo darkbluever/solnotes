@@ -1,0 +1,530 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>tmux安装配置记录 | sol&#39;s notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="sol_catdog">
+    
+
+    
+    <meta name="description" content="之前早就听过screen，一直没有尝试，今天有空准备试用一下。然而搜索screen相关教程的时候，看到很多tmux和screen的对比[1] [2]，大家普遍对tmux评价很高，认为可以作为screen的替代品，而且tmux的pane划分也很吸引我，于是我决定直接从tmux开始上手。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tmux安装配置记录">
+<meta property="og:url" content="http://solnotes.com/2015/07/22/tmux-install-and-config/index.html">
+<meta property="og:site_name" content="sol's notes">
+<meta property="og:description" content="之前早就听过screen，一直没有尝试，今天有空准备试用一下。然而搜索screen相关教程的时候，看到很多tmux和screen的对比[1] [2]，大家普遍对tmux评价很高，认为可以作为screen的替代品，而且tmux的pane划分也很吸引我，于是我决定直接从tmux开始上手。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tmux安装配置记录">
+<meta name="twitter:description" content="之前早就听过screen，一直没有尝试，今天有空准备试用一下。然而搜索screen相关教程的时候，看到很多tmux和screen的对比[1] [2]，大家普遍对tmux评价很高，认为可以作为screen的替代品，而且tmux的pane划分也很吸引我，于是我决定直接从tmux开始上手。">
+<meta name="twitter:creator" content="@darkbluever">
+
+    
+    <link rel="alternative" href="/atom.xml" title="sol&#39;s notes" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon_s.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/apple.jpeg">
+    <link rel="apple-touch-icon-precomposed" href="/img/apple.jpeg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="sol&#39;s notes">sol&#39;s notes</a></h1>
+				<h2 class="blog-motto">但行善事，莫问前程</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+						<li><a href="/atom.xml">Rss</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:solnotes.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/22/tmux-install-and-config/" title="tmux安装配置记录" itemprop="url">tmux安装配置记录</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-22T08:52:16.000Z" itemprop="datePublished"> 发表于 2015-07-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">2.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本"><span class="toc-number">3.</span> <span class="toc-text">脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ending"><span class="toc-number">4.</span> <span class="toc-text">ending</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-number">5.</span> <span class="toc-text">reference</span></a></li></ol>
+		
+		</div>
+		
+		<p>之前早就听过screen，一直没有尝试，今天有空准备试用一下。然而搜索screen相关教程的时候，看到很多tmux和screen的对比<sup><a href="#ref1">[1]</a> <a href="#ref2">[2]</a></sup>，大家普遍对tmux评价很高，认为可以作为screen的替代品，而且tmux的pane划分也很吸引我，于是我决定直接从tmux开始上手。</p>
+<a id="more"></a>
+<p>之前我也在James Pan的博客<sup><a href="#ref3">[3]</a></sup>和其他别的博客里面看到过tmux相关的文章，不过一直没有什么直观的感受，这次一边安装配置，一边又重新看了之前读过的博客。感觉之前看过的东西完全没有留下印象，直到这一次动手试了才有比较直观的感受，果然是生命在于折腾。</p>
+<p>tmux最吸引我的地方是session deattch和attach。因为工作过程中需要保持多个ssh连接，每天上班开始都要新建这些连接，而且往往吃完午饭回来就发现都断开了，又要重新连接，之前的工作状态完全被打断。所以希望通过tmux保留工作环境。其次才是pane分块带来的一些效率提升和乐趣。</p>
+<h2 id="安装">安装</h2><p>我在自己用的Ubuntu上面用apt-get安装的tmux，比较简单。但是公司的CentOS上的yum没有找到tmux，所以使用源码安装。</p>
+<p>tmux需要libeven2.0.10以上版本，所以我先安装了libevent2.0.22，然后在tmux目录执行configure的时候指明了gcc compiler的include路径和linker的library路径，具体命令如下：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">CFLAGS=</span><span class="string">"-I/usr/local/libevent2/include"</span> <span class="variable">LDFLAGS=</span><span class="string">"-L/usr/local/libevent2/lib"</span> ./configure <span class="variable">--prefix=</span>/usr/local/tmux</span><br></pre></td></tr></table></figure></p>
+<p>执行tmux的时候找不到libevent2.so.5，在/usr/lib64建立了软连接后运行成功。</p>
+<h2 id="配置">配置</h2><p>tmux的默认配置文件在~/.tmux.conf，已经有很多人提供了自己的配置，我参考了几份配置文件以后整理了一份还算易用的配置。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#此类配置可以在命令行模式中输入<span class="operator"><span class="keyword">show</span>-options -g查询</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g base-<span class="keyword">index</span> <span class="number">1</span>                        #窗口的初始序号；默认为<span class="number">0</span>，这里设置为<span class="number">1</span></span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g display-<span class="keyword">time</span> <span class="number">5000</span>                   #提示信息的持续时间；设置足够的时间以避免看不清提示，单位为毫秒</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">repeat</span>-<span class="keyword">time</span> <span class="number">1000</span>                    #控制台激活后的持续时间；设置合适的时间以避免每次操作都要先激活控制台，单位为毫秒</span><br><span class="line">#<span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span>-<span class="built_in">interval</span> <span class="number">1</span>                  #状态栏刷新频率</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span>-keys vi                      #操作状态栏时的默认键盘布局；可以设置为vi或emacs</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span>-utf8 <span class="keyword">on</span>                      #开启状态栏的UTF-<span class="number">8</span>支持</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g history-<span class="keyword">limit</span> <span class="number">65535</span>                 #历史行数</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span> <span class="keyword">on</span>                           #显示状态栏</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g mouse-<span class="keyword">select</span>-pane <span class="keyword">on</span>                #鼠标可以选中pane</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span>-bg black                     #状态栏背景色</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span>-fg cyan                      #状态栏前景色</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g message-attr dim                    #</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#此类设置可以在命令行模式中输入<span class="keyword">show</span>-window-options -g查询</span><br><span class="line"><span class="keyword">set</span>-window-<span class="keyword">option</span> -g <span class="keyword">mode</span>-keys vi                 #复制模式中的默认键盘布局；可以设置为vi或emacs</span><br><span class="line"><span class="keyword">set</span>-window-<span class="keyword">option</span> -g utf8 <span class="keyword">on</span>                      #开启窗口的UTF-<span class="number">8</span>支持</span><br><span class="line"><span class="keyword">set</span>-window-<span class="keyword">option</span> -g pane-base-<span class="keyword">index</span> <span class="number">1</span>            #pane初始序号，默认为<span class="number">0</span>，设置为<span class="number">1</span></span><br><span class="line"><span class="keyword">set</span>-window-<span class="keyword">option</span> -g <span class="keyword">mode</span>-mouse <span class="keyword">on</span>                #鼠标滚轮可以使用</span><br><span class="line"><span class="keyword">set</span>-window-<span class="keyword">option</span> -g window-<span class="keyword">status</span>-fg red         #窗口状态栏前景色</span><br><span class="line"><span class="keyword">set</span>-window-<span class="keyword">option</span> -g window-<span class="keyword">status</span>-bg <span class="keyword">default</span>     #窗口状态栏背景色</span><br><span class="line"><span class="keyword">set</span>-window-<span class="keyword">option</span> -g window-<span class="keyword">status</span>-attr dim       #</span><br><span class="line"></span><br><span class="line">#<span class="comment">-- colorscheme --#</span></span><br><span class="line"># statusbar</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span>-<span class="keyword">left</span> <span class="string">'#[fg=red] [#[fg=blue]#I #[fg=red]]#[default]'</span></span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span>-<span class="keyword">right</span> <span class="string">"#[fg=red][ #[fg=green]%H:%M #[fg=blue]%a %m-%d #[fg=red]] #[default]"</span></span><br><span class="line"><span class="keyword">set</span>-window-<span class="keyword">option</span> -g window-<span class="keyword">status</span>-<span class="keyword">format</span> <span class="string">'#[fg=blue,bold]#I #T#[default] '</span></span><br><span class="line"><span class="keyword">set</span>-window-<span class="keyword">option</span> -g window-<span class="keyword">status</span>-<span class="keyword">current</span>-<span class="keyword">format</span> <span class="string">'#[fg=red] [#[fg=green]#I #T#[fg=red]]#[default] '</span></span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span>-<span class="keyword">left</span>-length <span class="number">40</span></span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g <span class="keyword">status</span>-<span class="keyword">right</span>-length <span class="number">25</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#<span class="comment">-- bindkeys --#</span></span><br><span class="line"># prefix <span class="keyword">key</span> (Ctrl+a)</span><br><span class="line"><span class="keyword">set</span>-<span class="keyword">option</span> -g prefix ^a</span><br><span class="line">unbind ^b</span><br><span class="line">bind a send-prefix</span><br><span class="line"></span><br><span class="line"># <span class="keyword">select</span> pane</span><br><span class="line">bind k selectp -U # above (prefix k)</span><br><span class="line">bind j selectp -D # below (prefix j)</span><br><span class="line">bind h selectp -L # <span class="keyword">left</span> (prefix h)</span><br><span class="line">bind l selectp -R # <span class="keyword">right</span> (prefix l)</span></span><br></pre></td></tr></table></figure>
+<h2 id="脚本">脚本</h2><p>tmux可以进入命令行模式，快捷键为:，详细的可用命令与说明可以参考man page<sup><a href="#4">[4]</a></sup>。</p>
+<p>tmux命令可以写成脚本，并通过配置文件将执行脚本命令（source-file）绑定到某个按键，从而实现快速设置工作环境等目标。</p>
+<p>此外，tmux的命令也支持通过tmux + command的方式在shell环境调用，所以也可以将一系列tmux命令写为bash脚本的方式简化常用的初始化类操作。</p>
+<h2 id="ending">ending</h2><p>在写这篇博客的时候，通过James Pan的文章发现了<a href="https://github.com/Lokaltog/vim-powerline" target="_blank" rel="external">Poweline-vim</a>，一款很强大很漂亮的vim工具栏插件，tmux貌似也能用上。我是个不折不扣的工具控，比较喜欢折腾，一定要找机会试一试。不过现在已经用了不少时间了，堆了一些待办的事情，只能往后推一推了。</p>
+<h2 id="reference">reference</h2><p><span id="ref1">1.toy <a href="https://linuxtoy.org/archives/from-screen-to-tmux.html" target="_blank" rel="external">从 screen 切换到 tmux</a></span><br><span id="ref2">2.foocoder <a href="http://foocoder.com/blog/zhong-duan-huan-jing-zhi-tmux.html/" target="_blank" rel="external">终端环境之tmux</a></span><br><span id="ref3">3.James Pan <a href="http://blog.jamespan.me/2015/06/12/luit-with-tmux/" target="_blank" rel="external">Tmux、Luit 杂谈</a></span><br><span id="ref4">4.<a href="http://linux.die.net/man/1/tmux" target="_blank" rel="external">linux man page</a></span></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/study/">study</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/tools/">tools</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://solnotes.com/2015/07/22/tmux-install-and-config/" data-title="tmux安装配置记录 | sol&#39;s notes" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/09/24/use-composer-and-monolog-in-project/" title="在项目中使用composer和monolog的记录">
+  <strong>上一篇：</strong><br/>
+  <span>
+  在项目中使用composer和monolog的记录</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/05/04/svn-workflow-management/"  title="svn工作流管理个人实践">
+ <strong>下一篇：</strong><br/> 
+ <span>svn工作流管理个人实践
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">2.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本"><span class="toc-number">3.</span> <span class="toc-text">脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ending"><span class="toc-number">4.</span> <span class="toc-text">ending</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-number">5.</span> <span class="toc-text">reference</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/study/" title="study">study<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工程/" title="工程">工程<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/开发手册/" title="开发手册">开发手册<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/golang/" title="golang">golang<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数学/" title="数学">数学<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/tools/" title="tools">tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/composer/" title="composer">composer<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/工程/" title="工程">工程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/素数/" title="素数">素数<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/monolog/" title="monolog">monolog<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql-replication/" title="mysql replication">mysql replication<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Quartz/" title="Quartz">Quartz<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+		
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 技有止 <br/>
+			而道无涯</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/darkbluever" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/darkbluever" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:darkbluever@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="http://solnotes.com/about" target="_blank" title="sol_catdog">sol_catdog</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'solnotes';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc9b9ef07a4d0fb90a8b05cfea2df0957' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

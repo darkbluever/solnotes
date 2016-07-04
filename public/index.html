@@ -1,0 +1,990 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>sol&#39;s notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="sol_catdog">
+    
+
+    
+    <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="sol's notes">
+<meta property="og:url" content="http://solnotes.com/index.html">
+<meta property="og:site_name" content="sol's notes">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sol's notes">
+<meta name="twitter:description">
+<meta name="twitter:creator" content="@darkbluever">
+
+    
+    <link rel="alternative" href="/atom.xml" title="sol&#39;s notes" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon_s.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/apple.jpeg">
+    <link rel="apple-touch-icon-precomposed" href="/img/apple.jpeg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="sol&#39;s notes">sol&#39;s notes</a></h1>
+				<h2 class="blog-motto">但行善事，莫问前程</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+						<li><a href="/atom.xml">Rss</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:solnotes.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/19/mysql-high-availability-notes-1/" title="MySQL高可用笔记 -1- Replication基础" itemprop="url">MySQL高可用笔记 -1- Replication基础</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-19T03:47:14.000Z" itemprop="datePublished"> 发表于 2016-02-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="前言">前言</h2><p>MySQL Replication 可以将 master 节点的所有改变准确的复制到 slave 节点，按照复制方式可以分为 statement-based replication 和 row-based replication。</p>
+<!-- statement-based replication 是基于statement的复制，在语句少，数据变更大的时候效果更好，row-based replication 是基于数据行的复制，在语句多，数据变更相对少的时候效果更好。 -->
+<p>Replication 作用：</p>
+<ul>
+<li>异地多活</li>
+<li>水平扩展，负载均衡</li>
+<li>使用 slave 节点进行备份、数据分析等</li>
+<li>配置 delayed slave，避免误操作的影响</li>
+</ul>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/02/19/mysql-high-availability-notes-1/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/study/">study</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/mysql/">mysql</a><a href="/tags/mysql-replication/">mysql replication</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/19/mysql-high-availability-notes-1/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/02/19/start-of-2016/" title="写在2016年的开始" itemprop="url">写在2016年的开始</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-19T03:30:05.000Z" itemprop="datePublished"> 发表于 2016-02-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="牢骚">牢骚</h2><p>一晃已经2016年了，又有很长时间没写博客了。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/02/19/start-of-2016/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Life/">Life</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/19/start-of-2016/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/10/27/learn-and-try-to-use-quartz/" title="Quartz部署及开发学习" itemprop="url">Quartz部署及开发学习</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-10-27T01:51:12.000Z" itemprop="datePublished"> 发表于 2015-10-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="初识">初识</h2><p>之前有个项目想做用户自定义规则的定时任务，类似于Crontab的效果。当时调研了一下，基于JAVA的开源作业调度框架Quartz可能是技术和文档最成熟的选择。最近项目中用到了Quartz，所以看了下文档，简单学习了Quartz的部署和开发。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/10/27/learn-and-try-to-use-quartz/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/study/">study</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Quartz/">Quartz</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/10/27/learn-and-try-to-use-quartz/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/10/23/taskgo-dev-note-1/" title="taskgo开发手册 -1- 项目结构与命令行参数解析" itemprop="url">taskgo开发手册 -1- 项目结构与命令行参数解析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-10-23T02:25:49.000Z" itemprop="datePublished"> 发表于 2015-10-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="项目结构">项目结构</h2><p>在设计命令行参数之前，我先折腾了一番项目结构。因为是第一次做GO的项目，所以对build方式不太熟悉，只是知道main包会生成可执行程序，其他的包会生成库。这样的结构对一个只有一个可执行程序的项目来说已经足够了，但是我希望在taskgo的项目中包含server、worker、client三种可执行程序，就需要调整一下项目结构。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/10/23/taskgo-dev-note-1/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/开发手册/">开发手册</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/golang/">golang</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/10/23/taskgo-dev-note-1/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/24/use-composer-and-monolog-in-project/" title="在项目中使用composer和monolog的记录" itemprop="url">在项目中使用composer和monolog的记录</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-24T04:39:50.000Z" itemprop="datePublished"> 发表于 2015-09-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="缘起">缘起</h2><p>目前在做一个比较独立的项目模块，有了一定的时间和自主性，所以针对目前项目开发过程中的弊端，我尝试使用一些增加对代码掌控能力的工具。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/09/24/use-composer-and-monolog-in-project/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/工程/">工程</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/composer/">composer</a><a href="/tags/monolog/">monolog</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/09/24/use-composer-and-monolog-in-project/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/22/tmux-install-and-config/" title="tmux安装配置记录" itemprop="url">tmux安装配置记录</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-22T08:52:16.000Z" itemprop="datePublished"> 发表于 2015-07-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>之前早就听过screen，一直没有尝试，今天有空准备试用一下。然而搜索screen相关教程的时候，看到很多tmux和screen的对比<sup><a href="#ref1">[1]</a> <a href="#ref2">[2]</a></sup>，大家普遍对tmux评价很高，认为可以作为screen的替代品，而且tmux的pane划分也很吸引我，于是我决定直接从tmux开始上手。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/22/tmux-install-and-config/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/study/">study</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/tools/">tools</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/22/tmux-install-and-config/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/04/svn-workflow-management/" title="svn工作流管理个人实践" itemprop="url">svn工作流管理个人实践</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-04T08:42:51.000Z" itemprop="datePublished"> 发表于 2015-05-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="起">起</h2><p>这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/05/04/svn-workflow-management/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/工程/">工程</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/git/">git</a><a href="/tags/svn/">svn</a><a href="/tags/工程/">工程</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/04/svn-workflow-management/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/03/taskgo-dev-note-0/" title="taskgo开发手册 -0- origin" itemprop="url">taskgo开发手册 -0- origin</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-03T03:17:47.000Z" itemprop="datePublished"> 发表于 2015-05-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="缘起">缘起</h2><p>很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/05/03/taskgo-dev-note-0/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/开发手册/">开发手册</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/golang/">golang</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/03/taskgo-dev-note-0/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/21/prime-test/" title="也谈素性测试" itemprop="url">也谈素性测试</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-21T07:48:05.000Z" itemprop="datePublished"> 发表于 2015-04-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="前言">前言</h2><p>很早之前读过 Matrix67的<a href="http://www.matrix67.com/blog/archives/234">素数与素性测试</a>和 张洋的<a href="http://blog.codinglabs.org/articles/prime-test.html">聊聊如何检测素数</a>，读了之后获益匪浅，不过一直没有自己动手写一次试试。</p>
+<p>最近和朋友聊天，谈到如何找到距离某个数最近的素数，勾起了我的兴趣。遂重新读了这两篇博客，又查阅了一些其他的资料，自己动手写了一个简单的素数检测程序。下面记录了一些这次实践的经历以及脑洞。<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/21/prime-test/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/数学/">数学</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/数学/">数学</a><a href="/tags/素数/">素数</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/21/prime-test/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/14/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-14T04:13:42.000Z" itemprop="datePublished"> 发表于 2015-04-14</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="启">启</h2><p>从工作开始就断断续续的有了写博客的想法，之前也在新浪博客和博客园写过一两篇尝试，但是都没有坚持下来，还是希望能够维护一个自己的博客。这个想法其实从工作开始每过一阵子就会出现一次，但是因为种种原因一直没有付诸于实践。<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/14/hello-world/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Life/">Life</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hello-world/">hello world</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/14/hello-world/#disqus_thread" class="comments-count-link">Comments</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/study/" title="study">study<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工程/" title="工程">工程<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/开发手册/" title="开发手册">开发手册<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/golang/" title="golang">golang<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数学/" title="数学">数学<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/tools/" title="tools">tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/composer/" title="composer">composer<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/工程/" title="工程">工程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/素数/" title="素数">素数<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/monolog/" title="monolog">monolog<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql-replication/" title="mysql replication">mysql replication<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Quartz/" title="Quartz">Quartz<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+		
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 技有止 <br/>
+			而道无涯</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/darkbluever" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/darkbluever" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:darkbluever@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="http://solnotes.com/about" target="_blank" title="sol_catdog">sol_catdog</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'solnotes';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc9b9ef07a4d0fb90a8b05cfea2df0957' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>

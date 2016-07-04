@@ -1,0 +1,660 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>也谈素性测试 | sol&#39;s notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="sol_catdog">
+    
+
+    
+    <meta name="description" content="前言很早之前读过 Matrix67的素数与素性测试和 张洋的聊聊如何检测素数，读了之后获益匪浅，不过一直没有自己动手写一次试试。
+最近和朋友聊天，谈到如何找到距离某个数最近的素数，勾起了我的兴趣。遂重新读了这两篇博客，又查阅了一些其他的资料，自己动手写了一个简单的素数检测程序。下面记录了一些这次实践的经历以及脑洞。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="也谈素性测试">
+<meta property="og:url" content="http://solnotes.com/2015/04/21/prime-test/index.html">
+<meta property="og:site_name" content="sol's notes">
+<meta property="og:description" content="前言很早之前读过 Matrix67的素数与素性测试和 张洋的聊聊如何检测素数，读了之后获益匪浅，不过一直没有自己动手写一次试试。
+最近和朋友聊天，谈到如何找到距离某个数最近的素数，勾起了我的兴趣。遂重新读了这两篇博客，又查阅了一些其他的资料，自己动手写了一个简单的素数检测程序。下面记录了一些这次实践的经历以及脑洞。">
+<meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="也谈素性测试">
+<meta name="twitter:description" content="前言很早之前读过 Matrix67的素数与素性测试和 张洋的聊聊如何检测素数，读了之后获益匪浅，不过一直没有自己动手写一次试试。
+最近和朋友聊天，谈到如何找到距离某个数最近的素数，勾起了我的兴趣。遂重新读了这两篇博客，又查阅了一些其他的资料，自己动手写了一个简单的素数检测程序。下面记录了一些这次实践的经历以及脑洞。">
+<meta name="twitter:creator" content="@darkbluever">
+
+    
+    <link rel="alternative" href="/atom.xml" title="sol&#39;s notes" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon_s.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/apple.jpeg">
+    <link rel="apple-touch-icon-precomposed" href="/img/apple.jpeg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="sol&#39;s notes">sol&#39;s notes</a></h1>
+				<h2 class="blog-motto">但行善事，莫问前程</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+						<li><a href="/atom.xml">Rss</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:solnotes.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/21/prime-test/" title="也谈素性测试" itemprop="url">也谈素性测试</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://solnotes.com/about" title="sol_catdog" target="_blank" itemprop="author">sol_catdog</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-21T07:48:05.000Z" itemprop="datePublished"> 发表于 2015-04-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#素数定义"><span class="toc-number">2.</span> <span class="toc-text">素数定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1的素性"><span class="toc-number">3.</span> <span class="toc-text">1的素性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#素性测试"><span class="toc-number">4.</span> <span class="toc-text">素性测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#试除法（Trial_division）"><span class="toc-number">4.1.</span> <span class="toc-text">试除法（Trial division）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#费马素性测试（Fermat_primality_test）"><span class="toc-number">4.2.</span> <span class="toc-text">费马素性测试（Fermat_primality_test）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#米勒-拉宾素性测试（Miller–Rabin_primality_test）"><span class="toc-number">4.3.</span> <span class="toc-text">米勒-拉宾素性测试（Miller–Rabin_primality_test）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定理"><span class="toc-number">4.3.1.</span> <span class="toc-text">定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法"><span class="toc-number">4.3.2.</span> <span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AKS素数测试"><span class="toc-number">4.4.</span> <span class="toc-text">AKS素数测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模幂运算（Modular_exponentiation）"><span class="toc-number">4.5.</span> <span class="toc-text">模幂运算（Modular exponentiation）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#直接计算"><span class="toc-number">4.5.1.</span> <span class="toc-text">直接计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存优化计算方法"><span class="toc-number">4.5.2.</span> <span class="toc-text">内存优化计算方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位运算方法"><span class="toc-number">4.5.3.</span> <span class="toc-text">位运算方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="前言">前言</h2><p>很早之前读过 Matrix67的<a href="http://www.matrix67.com/blog/archives/234" target="_blank" rel="external">素数与素性测试</a>和 张洋的<a href="http://blog.codinglabs.org/articles/prime-test.html" target="_blank" rel="external">聊聊如何检测素数</a>，读了之后获益匪浅，不过一直没有自己动手写一次试试。</p>
+<p>最近和朋友聊天，谈到如何找到距离某个数最近的素数，勾起了我的兴趣。遂重新读了这两篇博客，又查阅了一些其他的资料，自己动手写了一个简单的素数检测程序。下面记录了一些这次实践的经历以及脑洞。<br><a id="more"></a></p>
+<h2 id="素数定义">素数定义</h2><p>既然是素性测试，首先要明确素数的定义：</p>
+<blockquote>
+<p>A natural number (i.e. 1, 2, 3, 4, 5, 6, etc.) is called a prime number (or a prime) if it has exactly two positive divisors, 1 and the number itself.[1]<br>Natural numbers greater than 1 that are not prime are called composite.<br>— <a href="http://en.wikipedia.org/wiki/Prime_number" target="_blank" rel="external">wikipedia</a></p>
+</blockquote>
+<p>即，一个自然数如果只能被1和它自身整除，那么这个自然数是素数。<br>大于1的自然数不是素数就是合数。</p>
+<p>例如：</p>
+<ul>
+<li>2是素数，因为它只能被1和2整除。</li>
+<li>3是素数。</li>
+<li>4不是素数，因为它可以被2整除。</li>
+<li>5是素数。</li>
+<li>6不是素数，因为它可以被2和3整除。</li>
+</ul>
+<p>因此，还有一个结论，以十进制书写时，大于5的素数都是以1、3、7、9结尾的。可以用于快速判断一个数是否 <strong><em>不是</em></strong> 素数。</p>
+<h2 id="1的素性">1的素性</h2><p>我一直有一个疑问，1到底是素数还是合数。以前一直是因为看到的素数定义里面都指明了大于1的自然数作为前提，也就没有深究。1这个自然数就一直作为素数定义中的特例被我接受了下来。</p>
+<p>这次认真看了下wiki，里面单独提及到了1的素性说明。</p>
+<blockquote>
+<p>Most early Greeks did not even consider 1 to be a number,[4] and so they did not consider it a prime. In the 19th century, however, many mathematicians did consider the number 1 a prime. For example, Derrick Norman Lehmer’s list of primes up to 10,006,721, reprinted as late as 1956,[5] started with 1 as its first prime.[6] Henri Lebesgue is said to be the last professional mathematician to call 1 prime.[7]</p>
+<p>Although a large body of mathematical work would still be valid when calling 1 a prime, the fundamental theorem of arithmetic (mentioned above) would not hold as stated. For example, the number 15 can be factored as 3 · 5 and 1 · 3 · 5; if 1 were admitted as a prime, these two presentations would be considered different factorizations of 15 into prime numbers, so the statement of that theorem would have to be modified. Similarly, the sieve of Eratosthenes would not work correctly if 1 were considered a prime: a modified version of the sieve that considers 1 as prime would eliminate all multiples of 1 (that is, all numbers) and produce as output only the single number 1. Furthermore, the prime numbers have several properties that the number 1 lacks, such as the relationship of the number to its corresponding value of Euler’s totient function or the sum of divisors function.</p>
+</blockquote>
+<p>原来在19世纪有一些数学教认为1是素数。只不过很多数学成果在1是素数的条件下会有问题。例如：</p>
+<ul>
+<li>算术基本定理（<a href="http://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic" target="_blank" rel="external">Fundamental theorem of arithmetic</a>），又称为正整数的唯一分解定理，即：每个大于1的自然数均可写为素数的积，而且这些素因子按大小排列之后，写法仅有一种方式。例如: $6936 = 2^3 \times 3 \times 17^2，1200 = 2^4 \times 3 \times 5^2$。<br>如果1也是素数的话，15可以写成 $3 \times 5$，也可以写成 $1 \times 3 \times 5$。这两个表达式是不同的，这样算数基本定理就需要修改了。</li>
+<li>埃拉托斯特尼筛法（<a href="http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes" target="_blank" rel="external">sieve of Eratosthenes</a>），简称埃氏筛，是一种公元前250年由古希腊数学家埃拉托斯特尼所提出的一种简单检定素数的算法。<br>它通过从2的倍数开始，迭代地将每一个素数的倍数标记为合数来筛选出某个范围中的素数。<br>例如，如果要找出小于等于n的所有素数，埃拉托斯特尼的方法是：<br>1.创建一个从2到n的连续数列。<br>2.首先，令p等于2，即第一个素数。<br>3.将数列中等于p的倍数的自然数标记为合数，p本身不标记。<br>4.找到未被标记的大于p的第一个数，如果没有这样的数，方法结束。否则，令p等于找到的新数（就是下一个素数），然后重复步骤3。<br><img src="http://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif" alt="sieve of Eratosthenes"><br>当这个方法结束时，所有未被标记的数就是素数。<br>还有一个优化方式，在第4步中，若$p^2$大于n，则可以直接结束而不必寻找大于p的新数。因为小于等于$p^2$的数中的合数都已经标记过了。<br>如果1也是素数的话，在第三步结束后，列表中就只剩下1了。这样这个筛选法也需要修改。</li>
+</ul>
+<p>另外，素数的一些特性1也没有，比如<a href="http://en.wikipedia.org/wiki/Euler%27s_totient_function" target="_blank" rel="external">欧拉函数</a>和<a href="http://en.wikipedia.org/wiki/Divisor_function" target="_blank" rel="external">除数函数</a>中的一些性质。关于1是否是素数的争论一直没有结束，只不过大多数人都倾向于1不是素数，因为1实在太特殊了，对很多理论都有影响。</p>
+<p>写到这里发现这个坑太深了，欧拉函数和除数函数我没有仔细往下看，因为越往深追溯遇到的不知道的理论越多。看来这个坑不是一天两天能填上的，我决定先补一下数学基础再说T_T。如果对此感兴趣的朋友可以看下<a href="https://cs.uwaterloo.ca/journals/JIS/VOL15/Caldwell1/cald5.html" target="_blank" rel="external">What is the Smallest Prime?</a>和<a href="https://cs.uwaterloo.ca/journals/JIS/VOL15/Caldwell2/cald6.html" target="_blank" rel="external">The History of the Primality of One: A Selection of Sources</a>。</p>
+<h2 id="素性测试">素性测试</h2><h3 id="试除法（Trial_division）">试除法（Trial division）</h3><p>试除法是判断一个给定整数n是否是素数的最基本的方法。该方法判断所有大于1且小于等于$\sqrt{n}$的整数是否可以整除n，如果有可以整除的数，则n是合数，否则判断n为素数。因为如果$n = a \times b, a \leq b$，则$a \leq \sqrt{n}$，所以只要试除到小于等于$\sqrt{n}$的整数即可。</p>
+<p>有一种实现起来更高效的方式，只要试除2到$\sqrt{n}$之间的所有素数，即可判断出n是否是素数。因为合数都可以写成更小的素数的乘积（参考上面提到的算术基本定理）。</p>
+<p>虽然试除法逻辑简单，实现比较容易，但是在面对大整数的时候，需要试除的素数数量会极速增长。根据<a href="http://en.wikipedia.org/wiki/Prime-counting_function" target="_blank" rel="external">素数计数函数</a>, 小于$\sqrt{n}$的素数数量约等于 $\sqrt{n} / \ln(\sqrt{n})$，所以试除法需要至少判断这些数是否能整除n。如果 $n = 10^{20}$，则需要试除4亿多个素数。这在现实工程中是难以接受的。<br><br></p>
+<h3 id="费马素性测试（Fermat_primality_test）">费马素性测试（<a href="http://en.wikipedia.org/wiki/Fermat_primality_test" target="_blank" rel="external">Fermat_primality_test</a>）</h3><p>既然试除法的效率无法接受，那么就需要寻找其他的替代方法。基于费马小定理，人们提出了一种基于随机化算法的检测方法来判断一个数是合数还是 <strong><em>可能是</em></strong> 素数，即费马素性测试。</p>
+<p>首先我们还是先看一下理论基础，<a href="http://en.wikipedia.org/wiki/Fermat%27s_little_theorem" target="_blank" rel="external">费马小定理</a>：<br><strong><em>如果p是素数，a是小于p的正整数，那么 $a^{p-1} \equiv 1 \pmod p$。</em></strong></p>
+<p>（关于费马小定理， Matrix67写得深入浅出，我应该不会写得比这个更好了，所以这部分直接引用自 Matrix67同学的<a href="http://www.matrix67.com/blog/archives/234" target="_blank" rel="external">素数与素性测试</a>）</p>
+<blockquote>
+<p>这个证明就有点麻烦了。<br>首先我们证明这样一个结论：如果 $p$ 是一个素数的话，那么对任意一个小于 $p$ 的正整数$a$，$a, 2a, 3a, …, (p-1)a$ 除以 $p$ 的余数正好是一个 $1$ 到 $p-1$ 的排列。例如，5是素数，3, 6, 9, 12除以5的余数分别为3, 1, 4, 2，正好就是1到4这四个数。</p>
+<p>反证法，假如结论不成立的话，那么就是说有两个小于 $p$ 的正整数 $m$ 和 $n$ 使得 $na$ 和 $ma$ 除以 $p$ 的余数相同。不妨假设 $n &gt; m$，则 $p$ 可以整除 $a(n-m)$。但 $p$ 是素数，那么 $a$ 和 $n-m$ 中至少有一个含有因子 $p$。这显然是不可能的，因为 $a$ 和 $n-m$ 都比 $p$ 小。</p>
+<p>用同余式表述，我们证明了：<br>$(p-1)! \equiv a \times 2a \times 3a \times … \times (p-1)a \pmod p$<br>也即：<br>$(p-1)! \equiv (p-1)! \times a^{p-1} \pmod p$<br>两边同时除以 $(p-1)!$，就得到了我们的最终结论：<br>$1 ≡ a^{p-1} \pmod p$</p>
+</blockquote>
+<p>费马素性测试，即选取小于p的正整数a，测试费马小定理是否成立，如果不成立，则p一定不是素数，如果成立，则p可能是素数。将上述过程重复n次，每次随机选取整数a进行测试。一般情况下，选取的a越多，测试结果越准确。</p>
+<p>而有一些合数p，对于所有大于1且小于p的正整数都符合费马小定理，这样的数p称为卡迈克尔数（<a href="http://en.wikipedia.org/wiki/Carmichael_number" target="_blank" rel="external">Carmichael number</a>）。保罗·艾狄胥猜想有无限个卡迈克尔数，1994年 William Alford 、 Andrew Granville 及 Carl Pomerance 证明了这个命题。最小的卡迈克尔数是561。因为这些数的存在，使得费马素性检验变得不可靠。<br><br></p>
+<h3 id="米勒-拉宾素性测试（Miller–Rabin_primality_test）">米勒-拉宾素性测试（<a href="http://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test" target="_blank" rel="external">Miller–Rabin_primality_test</a>）</h3><p>米勒-拉宾素性测试也是一个基于随机化算法的素性测试方法，判断了一个数是合数还是 <strong><em>可能是</em></strong> 素数。和费马素性测试相似，米勒-拉宾素性测试也是通过判断一组对素数成立的等式是否对我们想测试的数也成立来实现素性测试的。</p>
+<p>这个方法的原始版本来自卡内基梅隆大学的计算机系教授Gary Lee Miller，他首先提出了基于广义黎曼猜想的确定性算法，由于广义黎曼猜想并没有被证明，其后由以色列耶路撒冷希伯来大学的Michael O. Rabin教授作出修改，提出了不依赖于该假设的随机化算法。<br><br></p>
+<h4 id="定理">定理</h4><p>米勒-拉宾素性测试基于下面的定理：<br>如果对模 $n$ 存在 $1$ 的非平凡平方根，则 $n$ 是合数。即对方程 $x^2 \equiv 1 \pmod n$，方程的解除了 $1$ 和 $n-1$ 两个平凡根之外，还有其它的根，那么 $n$ 肯定是合数。</p>
+<p>假设 $p$是大于2的素数， $x$ 是摸 $p$ 等于1的平方根，则：<br>$x^2 \equiv 1 \pmod p$ ，即 $ (x - 1)( x + 1) \equiv 0 \pmod{p}$<br>也就是说素数 $p$ 整除 $(x - 1)( x + 1)$，因为 $p$ 是素数，它只能被 1 和 $p$ 整除，所以一定有 $x - 1 \equiv 0 \pmod p$ 或 $x - 1 \equiv 0 \pmod p$，所以 $x$ 模 $p$ 等于 1 或者 $p - 1$。<br><br></p>
+<h4 id="方法">方法</h4><p>假设 $n$ 是素数，且 $n &gt; 2$，则 $n - 1$是偶数，我们可以将其写为 $2^s \times d$ 的形式，其中 $s$ 和 $d$ 都是正整数，$d$ 是奇数。</p>
+<p>结合费马小定理，$a^{p-1} \equiv 1 \pmod p$。如果 $p$ 是素数，则 $p - 1$是偶数，我们不断计算 $a^{p-1}$的平方根，那么最后一定会得到 1 或者 $p - 1$。</p>
+<p>根据以上的理论，米勒-拉宾素性测试的等效表达为：<br>1.把 $n-1$ 表示成 $d \times 2^s$<br>2.计算 $a^{d \times 2^r} \pmod n ( 0 \leq r \leq s - 1 )$，（$r = s$ 时，此算式等效于费马小定理）<br>3.若结果是 1 和 $n-1$ 以外的值，测试结束，$n$是合数<br>4.若结果是 $n-1$，那么测试结束， $n$可能是素数，可以换一个底数 $a$ 进行下一轮计算<br>5.若结果是 1，那么仍然符合费马小定理，继续计算开方的值。即令 $r = r - 1$，$r \neq 0$ 的情况下回到第2步<br>6.直到计算到 $r = 0$，即 $a^d \pmod n$<br>7.若结果是 1 或 $n-1$，那么$n$可能是素数，可以换一个底数 $a$ 进行下一轮计算。否则测试结束，$n$是合数。</p>
+<p>所以如果 $n$ 是一个素数，那么或者 $a^d \equiv 1 \pmod n$，或者存在某个 $r$ 使得 $a^{d \times 2^r} \equiv n-1 \pmod n ( 0 \leq r \leq s-1 )$。<br><br></p>
+<p>以上面提到的卡迈克尔数 561为例，我们来看一下米勒-拉宾素性测试的实际应用：<br>1.560可以表示成 $35 \times 2^4$, 我们知道 $2^{560} = 1 \pmod {561}$。<br>2.计算得到 $2^{35 \times 2 ^ 3} = 1 \pmod {561}$<br>3.结果仍然符合费马小定理，继续计算，得到 $2^{35 \times 2 ^ 2} = 67 \pmod {561}$<br>4.测试结束，561是合数</p>
+<p>下面引用 Matrix67同学的<a href="http://www.matrix67.com/blog/archives/234" target="_blank" rel="external">素数与素性测试</a>补充说明：</p>
+<blockquote>
+<p>Miller-Rabin素性测试同样是不确定算法，我们把可以通过以a为底的Miller-Rabin测试的合数称作以a为底的强伪素数(strong pseudoprime)。第一个以2为底的强伪素数为2047。第一个以2和3为底的强伪素数则大到1 373 653。</p>
+<p>对于大数的素性判断，目前Miller-Rabin算法应用最广泛。一般底数仍然是随机选取，但当待测数不太大时，选择测试底数就有一些技巧了。比如，如果被测数小于4 759 123 141，那么只需要测试三个底数2, 7和61就足够了。当然，你测试的越多，正确的范围肯定也越大。如果你每次都用前7个素数(2, 3, 5, 7, 11, 13和17)进行测试，所有不超过341 550 071 728 320的数都是正确的。如果选用2, 3, 7, 61和24251作为底数，那么10^16内唯一的强伪素数为46 856 248 255 981。这样的一些结论使得Miller-Rabin算法在OI中非常实用。</p>
+<p>通常认为，Miller-Rabin素性测试的正确率可以令人接受，随机选取k个底数进行测试算法的失误率大概为 $4^{-k}$。</p>
+</blockquote>
+<p><br></p>
+<h3 id="AKS素数测试">AKS素数测试</h3><blockquote>
+<p>AKS素数测试（又被称为Agrawal–Kayal–Saxena素数测试和Cyclotomic AKS test）是一个决定型素数测试算法。由三个来自印度坎普尔理工学院的计算机科学家，Manindra Agrawal、Neeraj Kayal 和 Nitin Saxena 提出，在2002年8月6日发表于一篇题为 PRIMES is in P 的论文。作者们因此获得了许多奖项，包含了2006年的哥德尔奖和2006年的 Fulkerson Prize。这个算法可以在多项式时间之内，决定一个给定整数是素数或者合数。</p>
+<p>AKS最关键的重要性在于它是第一个被发表的<strong>一般的</strong>、<strong>多项式的</strong>、<strong>确定性的</strong>和<strong>无仰赖的</strong>素数判定算法。先前的算法至多达到了其中三点，但从未达到全部四个。</p>
+<p>AKS算法可以被用于检测任何一般的给定数字是否为素数。很多已知的高速判定算法只适用于满足特定条件的素数。例如，卢卡斯-莱默检验法仅对梅森素数适用，而Pépin测试仅对费马数适用。<br>算法的最长运行时间可以被表为一个目标数字长度的多项式。ECPP和APR能够判断一个给定数字是否为素数，但无法对所有输入给出多项式时间范围。<br>算法可以确定性地判断一个给定数字是否为素数。随机测试算法，例如米勒-拉宾检验和Baillie–PSW，可以在多项式时间内对给定数字进行校验，但只能给出概率性的结果。<br>AKS算法并未“仰赖”任何未证明猜想。一个反例是确定性米勒检验：该算法可以在多项式时间内对所有输入给出确定性结果，但其正确性却基于尚未被证明的广义黎曼猜想。<br>— <a href="http://zh.wikipedia.org/wiki/AKS%E8%B3%AA%E6%95%B8%E6%B8%AC%E8%A9%A6" target="_blank" rel="external">wikipedia</a></p>
+</blockquote>
+<p>此处留坑，有生之年。。。<br><a href="http://www.cse.iitk.ac.in/users/manindra/algebra/primality_v6.pdf" target="_blank" rel="external">PRIMES is in P</a><br><br></p>
+<h3 id="模幂运算（Modular_exponentiation）">模幂运算（<a href="http://en.wikipedia.org/wiki/Modular_exponentiation" target="_blank" rel="external">Modular exponentiation</a>）</h3><p>上面提到的费马素性测试和米勒-拉宾素性测试都涉及到了大量的模幂运算。<br>模幂运算计算了正整数 $b$ 的 $e$ 次方除以正整数 $m$ 的余数。用符号表示为，给定底数 $b$, 指数 $e$, 和模数 $m$, 模幂运算就是 $ c \equiv b^e \pmod{m}$。<br><br></p>
+<h4 id="直接计算">直接计算</h4><p>最基础的办法就是直接计算 $ b^e $，然后对 $m$ 取余。假设 $b = 4, e = 13, m = 497$，则 $ c \equiv 4^{13} \pmod{497} $。计算得到 $ 4^{13} $ 等于67,108,864，对497取模计算出 $c$, 为445。</p>
+<p>这个例子中 $b$ 和 $e$ 都是一位数，计算得到的 $ b^e $ 却是8位数。如果判断一个大数是否是素数的时候，$b$ 和 $e$ 都会很大，直接计算的计算效率将变得无法接受，所以需要更高效的计算方法。<br><br></p>
+<h4 id="内存优化计算方法">内存优化计算方法</h4><p>这个方法相比于直接计算，计算次数增多了，但是因为每次计算大大节省了内存的使用，所以总的计算速度还是比直接计算更快。</p>
+<p>这个方法的理论基础是，<br>$ c \equiv (a \cdot b) \pmod{m} $ 等价于 $ c \equiv (a \cdot (b\ (\mbox{mod}\ m))) \pmod{m} $<br>这样，不直接计算 $ b^e $，而是计算 $ \prod_{i=0}^{e} b $，这样就可以根据上面的等式将每次乘以 $b$ 以后的结果取余，从而使计算过程中的中间变量一直小于模数 $m$，确保了内存使用效率。</p>
+<p>具体的步骤如下：<br>1.令结果 $c = 1, e′ = 0.$<br>2.令 $ e′ = e′ + 1 $<br>3.计算 $ c \equiv (b \cdot c) \pmod{m} $<br>4.如果 $ e′ &lt; e $，回到第二步；否则计算结束，此时 $ c \equiv b^e \pmod{m} $。</p>
+<p>我们还用上面的例子来展示计算的具体过程：<br>$b = 4, e = 13, m = 497$</p>
+<ul>
+<li>$ e′ = 1. c = (1 \times 4) \pmod {497} = 4 \pmod {497} = 4.$</li>
+<li>$ e′ = 2. c = (4 \times 4) \pmod {497} = 16 \pmod {497} = 16.$</li>
+<li>$ e′ = 3. c = (16 \times 4) \pmod {497} = 64 \pmod {497} = 64.$</li>
+<li>$ e′ = 4. c = (64 \times 4) \pmod {497} = 256 \pmod {497} = 256.$</li>
+<li>$ e′ = 5. c = (256 \times 4) \pmod {497} = 1024 \pmod {497} = 30.$</li>
+<li>$ e′ = 6. c = (30 \times 4) \pmod {497} = 120 \pmod {497} = 120.$</li>
+<li>$ e′ = 7. c = (120 \times 4) \pmod {497} = 480 \pmod {497} = 480.$</li>
+<li>$ e′ = 8. c = (480 \times 4) \pmod {497} = 1920 \pmod {497} = 429.$</li>
+<li>$ e′ = 9. c = (429 \times 4) \pmod {497} = 1716 \pmod {497} = 225.$</li>
+<li>$ e′ = 10. c = (225 \times 4) \pmod {497} = 900 \pmod {497} = 403.$</li>
+<li>$ e′ = 11. c = (403 \times 4) \pmod {497} = 1612 \pmod {497} = 121.$</li>
+<li>$ e′ = 12. c = (121 \times 4) \pmod {497} = 484 \pmod {497} = 484.$</li>
+<li>$ e′ = 13. c = (484 \times 4) \pmod {497} = 1936 \pmod {497} = 445.$</li>
+</ul>
+<p>最终计算得到 $ c = 445 $，和直接计算的结果相同。<br>这种方法的时间复杂度是 O(e)。<br><br></p>
+<h4 id="位运算方法">位运算方法</h4><p>这个方法大大减少了模幂运算的计算次数，并保持了和上一种方法一致的内存使用，是上面两种方法的结合。</p>
+<p>首先，需要把指数 $e$ 写成二进制，即<br>$ e = \sum_{i=0}^{n-1} a_i \cdot 2^i $</p>
+<p>其中， $e$ 可写为 $n$ 位的二进制数，$ a_i $ 可以等于 0 或者 1，$0 ≤ i &lt; n - 1$, 默认 $ a_{n-1} = 1$。<br>于是，$ b^e $可以改写如下：<br>$ b^e = b^{\left( \sum_{i=0}^{n-1} a_i \cdot 2^i \right)} = \prod_{i=0}^{n-1} \left( b^{2^i} \right) ^ {a_i}$</p>
+<p>所以，最后 $c$ 可写为：<br>$ c \equiv \prod_{i=0}^{n-1} \left( b^{2^i} \right) ^ {a_i}\ (\mbox{mod}\ m)$<br><br></p>
+<p>如果 $e$ 很大的话，$n$ 也会比较大，此时 $b^{2^i}$ 仍然是一个比较耗费资源的幂运算。所以需要进一步优化：<br>$ \left({b^{2^i}}\right) ^ {a_i} =<br>\begin{cases}<br>1 &amp; \text{ if } a_i = 0 \\<br>b^{2^i} = ({b^2})^{2^{i-1}} = ({b^2} \cdot {b^2}) ^ {2^{i-2}} \pmod m &amp; \text{ if } a_i = 1<br>\end{cases}<br>$</p>
+<p>这样，通过将幂运算转化为底数 $b$ 的模幂运算，在保证了底数不大于 $m$ 的前提下，使得原公式中的 $2^i$ 部分始终等于1，就避免了高次幂运算。<br>例如：(此处我们暂不考虑 $a_i$ )</p>
+<ul>
+<li>$i=0$ 时，$b^{2^i} = b ^ 1 = b \pmod m = b_0$</li>
+<li>$i=1$ 时，$b^{2^i} = (b ^ 2)^{2^{i-1}} = b ^ 2 \pmod m = b_0^2 \pmod m = b_1$</li>
+<li>$i=2$ 时，$b^{2^i} = (b ^ 2)^{2^{i-1}} = (b ^ 2) ^ 2 = b_1 ^ 2 \pmod m = b_2$</li>
+<li>$i=3$ 时，$b^{2^i} = (b ^ 2)^{2^{i-1}} = (b_1^2) ^ 2 = b_2 ^ 2 \pmod m = b_3$</li>
+</ul>
+<p>这样就可以将 $c$ 改写为：<br>$ c \equiv \prod_{i=0}^{n-1} \left( b_i \right) ^ {a_i}\ (\mbox{mod}\ m), b_i = b_{i-1}^2 \pmod m$<br><br></p>
+<p>我们还以上面的例子展示计算过程：<br>$b = 4, e = 13 = 1101_{[2]}, m = 497$</p>
+<ul>
+<li>令$c = 1$，此时 $i = 0, a_i = 1$，所以 $c = (1 \times 4) \pmod {497} = 4 , b = (4 \times 4) \pmod {497} = 16$</li>
+<li>$i = 1, a_i = 0$，所以 $c$ 不变，$ b = (16 \times 16) \pmod {497} = 256$</li>
+<li>$i = 2, a_i = 1$，所以 $c = (4 \times 256) \pmod {497} = 30 , b = (256 \times 256) \pmod {497} = 429$</li>
+<li>$i = 3, a_i = 1$，所以 $c = (30 \times 429) \pmod {497} = 445 , b = (429 \times 429) \pmod {497} = 151$，计算结束。<br>最终计算得到 $ c = 445 $，和上面的方法计算结果相同。</li>
+</ul>
+<p>这个方法的时间复杂度由 O(e) 降为 O(log e).</p>
+<h2 id="结语">结语</h2><p>通过这次实践，又挖出了很多坑，发现了很多自己的不足之处。有一些坑还没能填上，留到以后数学水平提高了再回来填吧。另外，通过整理这些素性测试方法，对他们的理解也更深了一些。</p>
+<p>纸上得来终觉浅，须知此事要躬行。</p>
+<h2 id="References">References</h2><p>1.Matrix67 <a href="http://www.matrix67.com/blog/archives/234" target="_blank" rel="external">素数与素性测试</a><br>2.张洋 <a href="http://blog.codinglabs.org/articles/prime-test.html" target="_blank" rel="external">聊聊如何检测素数</a><br>3.bindog <a href="http://bindog.github.io/blog/2014/07/19/how-to-generate-big-primes/" target="_blank" rel="external">RSA周边——大素数是怎样生成的？</a><br>4.<a href="http://en.wikipedia.org/wiki/Prime_number" target="_blank" rel="external">wikipedia</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/数学/">数学</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/数学/">数学</a><a href="/tags/素数/">素数</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://solnotes.com/2015/04/21/prime-test/" data-title="也谈素性测试 | sol&#39;s notes" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/05/03/taskgo-dev-note-0/" title="taskgo开发手册 -0- origin">
+  <strong>上一篇：</strong><br/>
+  <span>
+  taskgo开发手册 -0- origin</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/04/14/hello-world/"  title="Hello World">
+ <strong>下一篇：</strong><br/> 
+ <span>Hello World
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#素数定义"><span class="toc-number">2.</span> <span class="toc-text">素数定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1的素性"><span class="toc-number">3.</span> <span class="toc-text">1的素性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#素性测试"><span class="toc-number">4.</span> <span class="toc-text">素性测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#试除法（Trial_division）"><span class="toc-number">4.1.</span> <span class="toc-text">试除法（Trial division）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#费马素性测试（Fermat_primality_test）"><span class="toc-number">4.2.</span> <span class="toc-text">费马素性测试（Fermat_primality_test）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#米勒-拉宾素性测试（Miller–Rabin_primality_test）"><span class="toc-number">4.3.</span> <span class="toc-text">米勒-拉宾素性测试（Miller–Rabin_primality_test）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定理"><span class="toc-number">4.3.1.</span> <span class="toc-text">定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法"><span class="toc-number">4.3.2.</span> <span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AKS素数测试"><span class="toc-number">4.4.</span> <span class="toc-text">AKS素数测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模幂运算（Modular_exponentiation）"><span class="toc-number">4.5.</span> <span class="toc-text">模幂运算（Modular exponentiation）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#直接计算"><span class="toc-number">4.5.1.</span> <span class="toc-text">直接计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存优化计算方法"><span class="toc-number">4.5.2.</span> <span class="toc-text">内存优化计算方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位运算方法"><span class="toc-number">4.5.3.</span> <span class="toc-text">位运算方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/study/" title="study">study<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工程/" title="工程">工程<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/开发手册/" title="开发手册">开发手册<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数学/" title="数学">数学<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/golang/" title="golang">golang<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数学/" title="数学">数学<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/tools/" title="tools">tools<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/composer/" title="composer">composer<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/工程/" title="工程">工程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/素数/" title="素数">素数<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/monolog/" title="monolog">monolog<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql-replication/" title="mysql replication">mysql replication<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Quartz/" title="Quartz">Quartz<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+		
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 技有止 <br/>
+			而道无涯</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/darkbluever" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/darkbluever" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:darkbluever@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="http://solnotes.com/about" target="_blank" title="sol_catdog">sol_catdog</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'solnotes';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc9b9ef07a4d0fb90a8b05cfea2df0957' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
