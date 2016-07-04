@@ -4,7 +4,7 @@
   <subtitle><![CDATA[但行善事，莫问前程]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://solnotes.com/"/>
-  <updated>2016-02-19T10:19:23.553Z</updated>
+  <updated>2016-06-24T09:34:30.000Z</updated>
   <id>http://solnotes.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://solnotes.com/2016/02/19/mysql-high-availability-notes-1/"/>
     <id>http://solnotes.com/2016/02/19/mysql-high-availability-notes-1/</id>
     <published>2016-02-19T03:47:14.000Z</published>
-    <updated>2016-02-19T10:19:23.553Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>MySQL Replication 可以将 master 节点的所有改变准确的复制到 slave 节点，按照复制方式可以分为 statement-based replication 和 row-based replication。</p>
 <!-- statement-based replication 是基于statement的复制，在语句少，数据变更大的时候效果更好，row-based replication 是基于数据行的复制，在语句多，数据变更相对少的时候效果更好。 -->
 <p>Replication 作用：</p>
@@ -88,7 +88,7 @@
     <link href="http://solnotes.com/2016/02/19/start-of-2016/"/>
     <id>http://solnotes.com/2016/02/19/start-of-2016/</id>
     <published>2016-02-19T03:30:05.000Z</published>
-    <updated>2016-02-19T08:06:18.583Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="牢骚">牢骚</h2><p>一晃已经2016年了，又有很长时间没写博客了。</p>
 <a id="more"></a>
 <p>这次倒也不是因为什么拖延症或者懒癌之类的，主要是因为自己偷懒，用空闲时间补番了。<em>(进击的巨人和一拳超人都追上进度了，看完了Fate Stay Night的UBW线，轻松向的看了小埋和南家三姐妹，暗杀教师和路人女主的养成方法也很棒，感谢陪伴我走过2015年的动漫 ~)</em>，所以一些练手的业余项目没有什么进展，也没学多少东西…而我又不太想写一些自己都觉得没什么意思的内容来凑数，所以就一直放到了现在。</p>
@@ -114,7 +114,7 @@
     <link href="http://solnotes.com/2015/10/27/learn-and-try-to-use-quartz/"/>
     <id>http://solnotes.com/2015/10/27/learn-and-try-to-use-quartz/</id>
     <published>2015-10-27T01:51:12.000Z</published>
-    <updated>2016-02-19T08:14:02.591Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="初识">初识</h2><p>之前有个项目想做用户自定义规则的定时任务，类似于Crontab的效果。当时调研了一下，基于JAVA的开源作业调度框架Quartz可能是技术和文档最成熟的选择。最近项目中用到了Quartz，所以看了下文档，简单学习了Quartz的部署和开发。</p>
 <a id="more"></a>
 <h2 id="了解">了解</h2><p>Quartz是个作业调度框架，相比于Crontab支持秒级别的时间粒度，还支持作业的持久化和集群化的部署。<br>Quartz的主要元素有：</p>
@@ -158,7 +158,7 @@
     <link href="http://solnotes.com/2015/10/23/taskgo-dev-note-1/"/>
     <id>http://solnotes.com/2015/10/23/taskgo-dev-note-1/</id>
     <published>2015-10-23T02:25:49.000Z</published>
-    <updated>2016-02-19T03:33:32.590Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="项目结构">项目结构</h2><p>在设计命令行参数之前，我先折腾了一番项目结构。因为是第一次做GO的项目，所以对build方式不太熟悉，只是知道main包会生成可执行程序，其他的包会生成库。这样的结构对一个只有一个可执行程序的项目来说已经足够了，但是我希望在taskgo的项目中包含server、worker、client三种可执行程序，就需要调整一下项目结构。</p>
 <a id="more"></a>
 <p>开始的时候，我给server、worker、client各自创建了一个目录，准备每个目录下面创建一个main package，但是这样的结构因为在项目目录下没有扩展名是go的程序文件，所以没办法直接使用go install构建，也没办法通过go get安装，需要自己写安装脚本，用户安装的时候也更麻烦一些。这和我期望的简单易用不太符合，所以这种方案被暂时搁置。</p>
@@ -199,7 +199,7 @@
     <link href="http://solnotes.com/2015/09/24/use-composer-and-monolog-in-project/"/>
     <id>http://solnotes.com/2015/09/24/use-composer-and-monolog-in-project/</id>
     <published>2015-09-24T04:39:50.000Z</published>
-    <updated>2016-02-19T03:34:03.398Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2><p>目前在做一个比较独立的项目模块，有了一定的时间和自主性，所以针对目前项目开发过程中的弊端，我尝试使用一些增加对代码掌控能力的工具。</p>
 <a id="more"></a>
 <h3 id="PHPUnit">PHPUnit</h3><p>首先在项目中引入的是PHPUnit，之前因为赶工期，开发过程中一直没有引入单元测试。而且因为QA资源比较紧张，所以我们的很多功能都是自己测试的，增加了很多人力成本不说，很多地方测试得还不够细致，导致漏掉了bug。</p>
@@ -243,7 +243,7 @@
     <link href="http://solnotes.com/2015/07/22/tmux-install-and-config/"/>
     <id>http://solnotes.com/2015/07/22/tmux-install-and-config/</id>
     <published>2015-07-22T08:52:16.000Z</published>
-    <updated>2015-07-23T12:22:25.087Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<p>之前早就听过screen，一直没有尝试，今天有空准备试用一下。然而搜索screen相关教程的时候，看到很多tmux和screen的对比<sup><a href="#ref1">[1]</a> <a href="#ref2">[2]</a></sup>，大家普遍对tmux评价很高，认为可以作为screen的替代品，而且tmux的pane划分也很吸引我，于是我决定直接从tmux开始上手。</p>
 <a id="more"></a>
 <p>之前我也在James Pan的博客<sup><a href="#ref3">[3]</a></sup>和其他别的博客里面看到过tmux相关的文章，不过一直没有什么直观的感受，这次一边安装配置，一边又重新看了之前读过的博客。感觉之前看过的东西完全没有留下印象，直到这一次动手试了才有比较直观的感受，果然是生命在于折腾。</p>
@@ -275,7 +275,7 @@
     <link href="http://solnotes.com/2015/05/04/svn-workflow-management/"/>
     <id>http://solnotes.com/2015/05/04/svn-workflow-management/</id>
     <published>2015-05-04T08:42:51.000Z</published>
-    <updated>2016-02-19T03:33:12.516Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="起">起</h2><p>这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。</p>
 <a id="more"></a>
 <h2 id="承">承</h2><p>在回滚线上代码并紧急修复了bug之后，我们有必要重新思考一下这次出现的问题。</p>
@@ -325,7 +325,7 @@
     <link href="http://solnotes.com/2015/05/03/taskgo-dev-note-0/"/>
     <id>http://solnotes.com/2015/05/03/taskgo-dev-note-0/</id>
     <published>2015-05-03T03:17:47.000Z</published>
-    <updated>2015-10-23T02:25:38.753Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2><p>很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。</p>
 <a id="more"></a>
 <h2 id="思路">思路</h2><p>之所以选择仿写Gearman，一方面是觉得这个软件涵盖了我想练习的几个方面，包括类似master-slave的拓扑结构维护、消息队列、数据持久化、多语言兼容协议等。另一方面也觉得这个软件的核心功能实现起来应该不太难，比较适合上手，而如果完成了基本的功能，又有可扩展的空间。</p>
@@ -363,7 +363,7 @@
     <link href="http://solnotes.com/2015/04/21/prime-test/"/>
     <id>http://solnotes.com/2015/04/21/prime-test/</id>
     <published>2015-04-21T07:48:05.000Z</published>
-    <updated>2016-01-08T01:09:45.316Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>很早之前读过 Matrix67的<a href="http://www.matrix67.com/blog/archives/234" target="_blank" rel="external">素数与素性测试</a>和 张洋的<a href="http://blog.codinglabs.org/articles/prime-test.html" target="_blank" rel="external">聊聊如何检测素数</a>，读了之后获益匪浅，不过一直没有自己动手写一次试试。</p>
 <p>最近和朋友聊天，谈到如何找到距离某个数最近的素数，勾起了我的兴趣。遂重新读了这两篇博客，又查阅了一些其他的资料，自己动手写了一个简单的素数检测程序。下面记录了一些这次实践的经历以及脑洞。<br><a id="more"></a></p>
 <h2 id="素数定义">素数定义</h2><p>既然是素性测试，首先要明确素数的定义：</p>
@@ -495,7 +495,7 @@
     <link href="http://solnotes.com/2015/04/14/hello-world/"/>
     <id>http://solnotes.com/2015/04/14/hello-world/</id>
     <published>2015-04-14T04:13:42.000Z</published>
-    <updated>2016-02-19T03:47:25.915Z</updated>
+    <updated>2016-06-24T09:34:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="启">启</h2><p>从工作开始就断断续续的有了写博客的想法，之前也在新浪博客和博客园写过一两篇尝试，但是都没有坚持下来，还是希望能够维护一个自己的博客。这个想法其实从工作开始每过一阵子就会出现一次，但是因为种种原因一直没有付诸于实践。<br><a id="more"></a><br>每次都没能下定决心，主要的原因有：</p>
 <ul>
 <li>太折腾。要搞定域名、博客程序、服务器、数据库等等。</li>

@@ -2,68 +2,68 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://solnotes.com/2016/02/19/mysql-high-availability-notes-1/</loc>
-    <lastmod>2016-02-19T10:19:23.553Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://solnotes.com/2015/10/27/learn-and-try-to-use-quartz/</loc>
-    <lastmod>2016-02-19T08:14:02.591Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://solnotes.com/2016/02/19/start-of-2016/</loc>
-    <lastmod>2016-02-19T08:06:18.583Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://solnotes.com/2015/04/14/hello-world/</loc>
-    <lastmod>2016-02-19T03:47:25.915Z</lastmod>
+    <loc>http://solnotes.com/2015/04/21/prime-test/</loc>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://solnotes.com/2015/09/24/use-composer-and-monolog-in-project/</loc>
-    <lastmod>2016-02-19T03:34:03.398Z</lastmod>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://solnotes.com/2015/10/23/taskgo-dev-note-1/</loc>
-    <lastmod>2016-02-19T03:33:32.590Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://solnotes.com/2015/05/04/svn-workflow-management/</loc>
-    <lastmod>2016-02-19T03:33:12.516Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://solnotes.com/2015/04/21/prime-test/</loc>
-    <lastmod>2016-01-08T01:09:45.316Z</lastmod>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://solnotes.com/2015/05/03/taskgo-dev-note-0/</loc>
-    <lastmod>2015-10-23T02:25:38.753Z</lastmod>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://solnotes.com/2015/05/04/svn-workflow-management/</loc>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://solnotes.com/2016/02/19/start-of-2016/</loc>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://solnotes.com/2015/07/22/tmux-install-and-config/</loc>
-    <lastmod>2015-07-23T12:22:25.087Z</lastmod>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://solnotes.com/2016/02/19/mysql-high-availability-notes-1/</loc>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://solnotes.com/2015/10/27/learn-and-try-to-use-quartz/</loc>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://solnotes.com/2015/04/14/hello-world/</loc>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://solnotes.com/404.html</loc>
-    <lastmod>2015-04-15T01:17:39.808Z</lastmod>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://solnotes.com/about/index.html</loc>
-    <lastmod>2015-04-14T10:11:53.099Z</lastmod>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://solnotes.com/README.html</loc>
-    <lastmod>2015-04-14T03:26:28.826Z</lastmod>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
 </urlset>
