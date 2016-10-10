@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://solnotes.com/2015/04/21/prime-test/</loc>
-    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
+    <loc>http://solnotes.com/2016/10/08/simple-stats-in-abtesting/</loc>
+    <lastmod>2016-10-10T04:01:35.381Z</lastmod>
   </url>
   
   <url>
-    <loc>http://solnotes.com/2015/09/24/use-composer-and-monolog-in-project/</loc>
+    <loc>http://solnotes.com/2015/04/21/prime-test/</loc>
     <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
@@ -28,6 +28,11 @@
   
   <url>
     <loc>http://solnotes.com/2016/02/19/start-of-2016/</loc>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://solnotes.com/2015/09/24/use-composer-and-monolog-in-project/</loc>
     <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   

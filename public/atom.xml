@@ -4,7 +4,7 @@
   <subtitle><![CDATA[但行善事，莫问前程]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://solnotes.com/"/>
-  <updated>2016-06-24T09:34:30.000Z</updated>
+  <updated>2016-10-10T04:01:35.381Z</updated>
   <id>http://solnotes.com/</id>
   
   <author>
@@ -13,6 +13,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[A/B Test中的统计学简述]]></title>
+    <link href="http://solnotes.com/2016/10/08/simple-stats-in-abtesting/"/>
+    <id>http://solnotes.com/2016/10/08/simple-stats-in-abtesting/</id>
+    <published>2016-10-08T08:16:53.000Z</published>
+    <updated>2016-10-10T04:01:35.381Z</updated>
+    <content type="html"><![CDATA[<h2 id="引子">引子</h2><p>最近做了一个 A/B 测试相关的项目，填补了这部分知识的空白。以前只知道 A/B 测试的大概机制，对原理并没有什么了解，通过这个项目，对 A/B 测试的统计学原理有了一点了解，遂决定记录成文，顺便更新下大半年没动过的博客……<br><a id="more"></a></p>
+<h2 id="A/B_testing">A/B testing</h2><p>A/B 测试大家应该都有所了解，所以就简单引用一下定义：</p>
+<blockquote>
+<p>In marketing and business intelligence, A/B testing is a term for a randomized experiment with two variants, A and B, which are the control and variation in the controlled experiment.[1]<br>A/B testing is a form of statistical hypothesis testing with two variants leading to the technical term, two-sample hypothesis testing, used in the field of statistics.<br>— <a href="https://en.wikipedia.org/wiki/A/B_testing" target="_blank" rel="external">wikipedia</a></p>
+</blockquote>
+<p>即，A/B 测试是一种两样本的随机对照试验，在统计学上是一种两样本的假设检验。在计算机方面，A/B 测试通常是为了通过评估对照组和实验组之间的差异，决定产品迭代的方向。A/B 测试的概念也被扩展到多样本的实验方式上。</p>
+<p>我之前对 A/B 测试的理解仅限于大概流程，实验设计-&gt;流量划分-&gt;实验进行-&gt;数据采集-&gt;数据分析-&gt;结论产出，但是一直没想过数据分析是如何进行的，这次主要填补的就是这部分的内容。</p>
+<h2 id="总体与样本">总体与样本</h2><p>研究对象的某项数量指标的全体称为总体，总体中个每个元素称为个体。在A/B测试中，我们产品的所有用户的某项指标构成总体，例如用户的付款转化率等。</p>
+<p>实际应用中，通常总体的量级可能会非常大，不适于直接在总体上做实验并分析数据；或者不希望过多的用户参与到 A/B 测试中，避免对大部分用户造成打扰，所以一般做 A/B 测试都是使用小流量进行的，即流量划分这一步会决定哪部分流量进行实验，根据对这一部分流量的实验数据进行分析，将结论推广到全部流量。</p>
+<p>这里就涉及到总体和样本的问题，流量划分即通过抽样来从总体中划定实验范围的过程。</p>
+<p>抽样，是指按照一定规则从总体中抽取若干个体进行观察试验，以推断总体的分布及特征等信息的方式。最常用的抽样方法是随机抽样，即从总体中随机抽取n个个体作为样本，使得每一个个体都有相同的概率被抽中。常用于个体间差异较小，且互相独立的情况。此外使用较多的还有分层抽样，即将个体按照某种特征或规则划分为不同的层，然后从不同的层中独立、随机地抽取样本，从而保证样本的结构和总体的结构相近。</p>
+<p>抽样最重要的一点就是要尽量保证样本具有代表性，避免样本误差对实验结论的影响，否则根据有偏差的样本得出的数据和结论可能会带来误导。</p>
+<h2 id="统计量及其分布">统计量及其分布</h2><p>在选择完抽样方法后，还需要选择适当的统计指标来评估对照组和实验组的表现。通常，我们选择的都是一维连续随机变量，例如pv、uv、点击率等，随机变量的分布函数描述了随机变量的概率分布的情况。我们实际常用的分布主要是正态分布和t分布。</p>
+<h3 id="正态分布">正态分布</h3><p>正态分布是一种应用非常广泛的概率分布，正态分布的密度曲线是一条关于$x = \mu$对称的钟形曲线，方差$\sigma ^{2}$决定了曲线中峰的陡峭程度。其中，$\mu$ 是正态分布的数学期望，$\sigma$ 是正态分布的方差，正态分布记为 $X \sim N(\mu,\sigma ^ {2})$。$\mu = 0$ 且 $\sigma = 1$ 时的正态分布称为标准正态分布，记为 $X \sim N(0,1)$。<br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Normal_Distribution_PDF.svg/350px-Normal_Distribution_PDF.svg.png" alt="" title="normal distribution"></p>
+<p>根据中心极限定理，一个变量如果是由大量微小的、独立的随机因素叠加的结果，那么当样本量足够大的时候，这个变量近似服从正态分布。<br><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/De_moivre-laplace.gif" alt="" title="central limit theorem"></p>
+<h3 id="t分布">t分布</h3><p>通常情况下，我们无法知道正态分布的总体的方差，只能用样本方差近似的代替总体方差进行计算，当样本量比较大的时候，我们可以取到比较好的近似值，但是当样本量不足的时候，误差较大，所以需要应用t分布来计算。</p>
+<p>t分布曲线和标准正态分布曲线非常接近，t分布的最大值比标准正态分布略小，尾部的概率比标准正态分布大一些。当样本量充分大的时候，t分布可以近似看作是标准正态分布。<br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/TStudent.png/325px-TStudent.png" alt=""></p>
+<h2 id="参数估计">参数估计</h2><p>根据采集到的样本数据，可以计算样本的均值、方差、标准差等分布特征。但是根据对样本数据的计算得到的特征值存在一定的偏差，并不能准确反应总体分布特征，因此需要根据样本特征值对总体进行估计。</p>
+<p>参数估计的形式有两种：</p>
+<ul>
+<li>点估计：根据样本估计参数的近似值</li>
+<li>区间估计：根据样本构造一个参数的取值范围，使得待估参数落在这个范围中的可信程度较高</li>
+</ul>
+<h3 id="置信区间">置信区间</h3><p>置信区间是区间估计的一种，展现了总体的参数有一定概率落在从样本计算出的某对应区间内。这个概率也被称为置信度，我们常说的95%置信区间就是指置信度是0.95的对应区间。置信度越高，结果的可靠性也就越高，但是置信度的提高往往伴随着区间的扩大。</p>
+<h2 id="假设检验">假设检验</h2><p>假设检验通常用来根据样本数据推断总体的某些性质，先对总体的参数提出某种假设，然后利用样本数据判断假设是否成立。在A/B测试中，通常我们希望推断的性质是优化指标的总体期望，即实验组对应的总体的某个优化指标的均值是否优于对照组的相应总体指标。</p>
+<p>假设检验运用了反证法，其一般流程是</p>
+<ul>
+<li>提出原假设和备择假设，原假设的内容一般是希望被证明为错误的假设或者需要着重考虑的假设。与原假设相对的是备择假设，即希望被证明是正确的另一种可能</li>
+<li>选择检验方法和检验统计量</li>
+<li>在原假设下推导统计量的分布，比如正态分布或t分布等</li>
+<li>选择显著性水平</li>
+<li>计算拒绝域，如果统计量未落在拒绝域，则接受原假设，如果统计量落在拒绝域，则接受备择假设。</li>
+</ul>
+<h3 id="显著性检验">显著性检验</h3><p>拒绝域即拒绝原假设的区域，其概率即为显著性水平。常用显著性水平如5%、1%等，即在原假设成立的条件下，样本值落在拒绝域的概率很低，是一个小概率事件，按照实际推断原理，小概率事件在一次抽样中一般是不会发生的，因为我们有理由认为样本值落在拒绝域的时候，原假设是不成立的。</p>
+<p>不过实际推断原理只是说在一次抽样中，小概率事件可以认为是不会发生的，而不能肯定绝对不发生。因此，有一定概率在原假设成立的情况下，统计量落入拒绝域，导致我们拒绝原假设。这种情况实际上是一种错误，在假设检验中，称这种错误为第一类错误，也就是“弃真”错误，发生的概率记作 $\alpha$，即显著性水平。另一种错误是原假设不成立，但是接受了原假设，称为第二类错误，即“受伪”错误，它发生的概率记作 $\beta$。</p>
+<p>由于抽样的随机性，我们不可能完全排除这两类错误的发生，因此只能把这两类错误控制在一定的范围之内。当样本容量n确定之后，犯两类错误的概率不可能同时降低，通常我们会用一个较小的显著性水平$\alpha$来控制第一类错误的发生，因为原假设一般是结合问题特点提出的，需要着重考虑的假设，不应该轻易拒绝，所以第一类错误的概率要控制得较小。这种值控制犯第一类错误的概率，而不考虑犯第二类错误的概率的检验，称为显著性检验。</p>
+<h3 id="双侧检验，单侧检验">双侧检验，单侧检验</h3><p>实际应用中，我们经常会区分双侧检验和单侧检验，这是根据备择假设的定义选定的，即：</p>
+<ul>
+<li>双侧检验：如果备择假设没有特定的方向性，这样的检验称为双侧检验，对于正态分布而言，拒绝域分布在曲线的两端</li>
+<li>单侧检验：如果备择假设具有特定的方向性，这样的检验称为单侧检验，对于正态分布而言，拒绝域在曲线的一侧</li>
+</ul>
+<h3 id="Z检验">Z检验</h3><p>Z检验适用于大样本的两平均数之间差异显著性检验的方法，它是通过计算两个平均数之间差的Z分数来与规定的理论Z值像比较，从而判定两平均数的差异是否显著的一种差异显著性检验方法。</p>
+<h3 id="t检验">t检验</h3><p>t检验是用t分布理论来推断两个平均数差异的显著性检验。常用于根据小样本来估计呈正态分布且方差未知的总体的均值，如果方差已知，应该用正态分布来估计总体均值。t检验是对Z检验的改进，因为Z检验的前提是总体的标准差已知，虽然在样本数量大(通常是30)的时候，可以用Z检验求得近似值，但样本量小的时候，误差较大，因此要改用t检验以求准确。</p>
+<p>常用t检验的情况：</p>
+<ul>
+<li>单样本检验：检验一个正态分布的总体的均值是否满足原假设</li>
+<li>双样本检验：检验两个正态分布的总体均值之差是否满足原假设</li>
+<li>配对t检验：检验一个正态分布的两组配对样本的总体均值之差或一组样本的前后两次测量的总体均值之差是否满足原假设</li>
+</ul>
+<h2 id="结语">结语</h2><h2 id="References">References</h2><p><a href="https://en.wikipedia.org/wiki/A/B_testing" target="_blank" rel="external">A/B Testing</a><br><a href="https://zh.wikipedia.org/wiki/%E6%8A%BD%E6%A8%A3" target="_blank" rel="external">抽样</a><br><a href="https://zh.wikipedia.org/wiki/%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83" target="_blank" rel="external">正态分布</a><br><a href="https://zh.wikipedia.org/wiki/%E5%AD%A6%E7%94%9Ft-%E5%88%86%E5%B8%83" target="_blank" rel="external">t分布</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="引子">引子</h2><p>最近做了一个 A/B 测试相关的项目，填补了这部分知识的空白。以前只知道 A/B 测试的大概机制，对原理并没有什么了解，通过这个项目，对 A/B 测试的统计学原理有了一点了解，遂决定记录成文，顺便更新下大半年没动过的博客……<br>]]>
+    
+    </summary>
+    
+      <category term="A/B testing" scheme="http://solnotes.com/tags/A-B-testing/"/>
+    
+      <category term="数学" scheme="http://solnotes.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="统计学" scheme="http://solnotes.com/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+      <category term="数学" scheme="http://solnotes.com/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[MySQL高可用笔记 -1- Replication基础]]></title>
