@@ -11,16 +11,19 @@
     
 
     
-    <meta name="description" content="起这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。">
+    <meta name="description" content="起
+这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="svn工作流管理个人实践">
 <meta property="og:url" content="http://solnotes.com/2015/05/04/svn-workflow-management/index.html">
 <meta property="og:site_name" content="sol's notes">
-<meta property="og:description" content="起这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。">
+<meta property="og:description" content="起
+这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。">
 <meta property="og:image" content="http://nvie.com/img/git-model@2x.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="svn工作流管理个人实践">
-<meta name="twitter:description" content="起这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。">
+<meta name="twitter:description" content="起
+这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。">
 <meta name="twitter:creator" content="@darkbluever">
 
     
@@ -99,30 +102,37 @@
 		
 		</div>
 		
-		<h2 id="起">起</h2><p>这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。</p>
+		<h2 id="起">起</h2>
+<p>这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。</p>
 <a id="more"></a>
-<h2 id="承">承</h2><p>在回滚线上代码并紧急修复了bug之后，我们有必要重新思考一下这次出现的问题。</p>
-<ul>
-<li>代码没有做有效的管理，修复bug的时候没有从trunk新建issue分支</li>
-<li>发布代码上线的时候没有经过充分的测试</li>
-<li>因为是内部产品且所修复模块用户量不大，工程师略有松懈，发布比较仓促</li>
-<li>发布的时候线上代码没有进行备份</li>
-</ul>
-<h2 id="转">转</h2><p>经过反思，我们重新梳理了对svn工作流的管理。</p>
-<p><img src="http://nvie.com/img/git-model@2x.png" alt="" title="Vincent Driessen - a-successful-git-branching-model"></p>
+<h2 id="承">承</h2>
+<p>在回滚线上代码并紧急修复了bug之后，我们有必要重新思考一下这次出现的问题。 - 代码没有做有效的管理，修复bug的时候没有从trunk新建issue分支 - 发布代码上线的时候没有经过充分的测试 - 因为是内部产品且所修复模块用户量不大，工程师略有松懈，发布比较仓促 - 发布的时候线上代码没有进行备份</p>
+<h2 id="转">转</h2>
+<p>经过反思，我们重新梳理了对svn工作流的管理。</p>
+<div class="figure">
+<img src="http://nvie.com/img/git-model@2x.png" title="Vincent Driessen - a-successful-git-branching-model">
+
+</div>
 <p>借鉴 Vincent Driessen 的<a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="external">a-successful-git-branching-model</a>，我们将svn的工作流分为以下几个部分。</p>
-<h3 id="发布">发布</h3><p>trunk作为项目的主分支，只维护可发布的稳定代码。开发不在trunk上进行，只有要发布的时候才把代码合并到trunk。</p>
+<h3 id="发布">发布</h3>
+<p>trunk作为项目的主分支，只维护可发布的稳定代码。开发不在trunk上进行，只有要发布的时候才把代码合并到trunk。</p>
 <p>所有发布都基于trunk的代码进行，发布时新建tag以标记发布代码的快照。</p>
-<h3 id="开发">开发</h3><p>除了trunk以外，版本库最重要的一个分支是dev分支。dev分支主要用于日常的开发工作。除了release和fix bug的分支，其他的分支不直接合并到trunk，而是合并到dev分支。</p>
-<h3 id="预发布">预发布</h3><p>当dev分支的代码处在某个逻辑闭环的稳定状态时，可以基于dev分支新建预发布分支，可以命名为release-*，其中*为要发布的版本号。</p>
+<h3 id="开发">开发</h3>
+<p>除了trunk以外，版本库最重要的一个分支是dev分支。dev分支主要用于日常的开发工作。除了release和fix bug的分支，其他的分支不直接合并到trunk，而是合并到dev分支。</p>
+<h3 id="预发布">预发布</h3>
+<p>当dev分支的代码处在某个逻辑闭环的稳定状态时，可以基于dev分支新建预发布分支，可以命名为release-*，其中*为要发布的版本号。</p>
 <p>预发布分支经过测试和bug修复稳定下来以后，需要合并回dev分支和trunk，然后trunk的代码可以用于正式发布新的版本。</p>
-<h3 id="bug修复">bug修复</h3><p>当在线上版本发现bug后，基于trunk新建修复特定bug的分支，可以命名为issue-*，其中*部分使用bug追踪系统的bug编号。</p>
+<h3 id="bug修复">bug修复</h3>
+<p>当在线上版本发现bug后，基于trunk新建修复特定bug的分支，可以命名为issue-*，其中*部分使用bug追踪系统的bug编号。</p>
 <p>bug修复并测试通过以后，将issue分支合并回trunk和dev分支。</p>
-<h3 id="新特性开发">新特性开发</h3><p>当有某种特定的新功能需要开发时，可以在基于dev新建的特定分支上进行，这样的分支可以命名为feature-*，其中*为新特性的代号。</p>
+<h3 id="新特性开发">新特性开发</h3>
+<p>当有某种特定的新功能需要开发时，可以在基于dev新建的特定分支上进行，这样的分支可以命名为feature-*，其中*为新特性的代号。</p>
 <p>如果需要包括新特性，则将其合并到dev分支。如果最终不需要的话可以删除此分支。</p>
-<h2 id="合">合</h2><p>基于svn的工作流有很多种，以上只是其中一种实践。这样可以充分隔离开不同的功能和版本之间的代码，在保证开发效率的同时，确保发布代码的稳定性。</p>
+<h2 id="合">合</h2>
+<p>基于svn的工作流有很多种，以上只是其中一种实践。这样可以充分隔离开不同的功能和版本之间的代码，在保证开发效率的同时，确保发布代码的稳定性。</p>
 <p>Git的branch和tag、merge操作都更简洁高效，不过目前公司使用的主流工具还是svn，所以本篇博客主要基于svn，不足之处还请大家指出。</p>
-<h2 id="reference">reference</h2><ol>
+<h2 id="reference">reference</h2>
+<ol style="list-style-type: decimal">
 <li>Vincent Driessen <a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="external">a-successful-git-branching-model</a></li>
 <li>ruanyifeng <a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="external">Git分支管理策略</a></li>
 <li>oldratlee <a href="https://github.com/oldratlee/translations/blob/master/git-workflows-and-tutorials/README.md" target="_blank" rel="external">Git工作流指南</a></li>

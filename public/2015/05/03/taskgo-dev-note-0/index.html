@@ -11,15 +11,18 @@
     
 
     
-    <meta name="description" content="缘起很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
+    <meta name="description" content="缘起
+很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="taskgo开发手册 -0- origin">
 <meta property="og:url" content="http://solnotes.com/2015/05/03/taskgo-dev-note-0/index.html">
 <meta property="og:site_name" content="sol's notes">
-<meta property="og:description" content="缘起很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
+<meta property="og:description" content="缘起
+很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="taskgo开发手册 -0- origin">
-<meta name="twitter:description" content="缘起很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
+<meta name="twitter:description" content="缘起
+很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
 <meta name="twitter:creator" content="@darkbluever">
 
     
@@ -98,26 +101,15 @@
 		
 		</div>
 		
-		<h2 id="缘起">缘起</h2><p>很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。</p>
+		<h2 id="缘起">缘起</h2>
+<p>很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。</p>
 <a id="more"></a>
-<h2 id="思路">思路</h2><p>之所以选择仿写Gearman，一方面是觉得这个软件涵盖了我想练习的几个方面，包括类似master-slave的拓扑结构维护、消息队列、数据持久化、多语言兼容协议等。另一方面也觉得这个软件的核心功能实现起来应该不太难，比较适合上手，而如果完成了基本的功能，又有可扩展的空间。</p>
-<p>根据我现在的设想，taskgo的基本功能如下：</p>
-<ul>
-<li>单task server，多task worker模式</li>
-<li>task server 维护单任务队列</li>
-</ul>
-<p>扩展功能可能包括：</p>
-<ul>
-<li>多task server，多task server模式</li>
-<li>多任务队列</li>
-<li>多种优先级</li>
-<li>数据持久化</li>
-<li>外部产品数据持久化支持（例如redis，mysql）</li>
-<li>二进制日志、故障恢复</li>
-<li>task monitor（task server 和 task worker状态监控）</li>
-<li>其他后续补充</li>
-</ul>
-<h2 id="启航">启航</h2><p>虽然这可能是一个很漫长的过程，但是我希望可以一边开发一边学习，最终把这篇博客挖出来的坑填上。希望在这个过程中有所收获，一路坚持下去！<br>#2015 我的Go语言之旅#</p>
+<h2 id="思路">思路</h2>
+<p>之所以选择仿写Gearman，一方面是觉得这个软件涵盖了我想练习的几个方面，包括类似master-slave的拓扑结构维护、消息队列、数据持久化、多语言兼容协议等。另一方面也觉得这个软件的核心功能实现起来应该不太难，比较适合上手，而如果完成了基本的功能，又有可扩展的空间。</p>
+<p>根据我现在的设想，taskgo的基本功能如下： - 单task server，多task worker模式 - task server 维护单任务队列</p>
+<p>扩展功能可能包括： - 多task server，多task server模式 - 多任务队列 - 多种优先级 - 数据持久化 - 外部产品数据持久化支持（例如redis，mysql） - 二进制日志、故障恢复 - task monitor（task server 和 task worker状态监控） - 其他后续补充</p>
+<h2 id="启航">启航</h2>
+<p>虽然这可能是一个很漫长的过程，但是我希望可以一边开发一边学习，最终把这篇博客挖出来的坑填上。希望在这个过程中有所收获，一路坚持下去！ #2015 我的Go语言之旅#</p>
   
 	</div>
 		<footer class="article-footer clearfix">

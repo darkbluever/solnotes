@@ -80,7 +80,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/10/08/simple-stats-in-abtesting/" title="A/B Test中的统计学简述" itemprop="url">A/B Test中的统计学简述</a>
+      <a href="/2016/10/08/simple-stats-in-abtesting/" title="A/B Testing中的统计学简述" itemprop="url">A/B Testing中的统计学简述</a>
   </h1>
   <p class="article-author">By
        
@@ -93,7 +93,8 @@
 </header>
     <div class="article-content">
         
-        <h2 id="引子">引子</h2><p>最近做了一个 A/B 测试相关的项目，填补了这部分知识的空白。以前只知道 A/B 测试的大概机制，对原理并没有什么了解，通过这个项目，对 A/B 测试的统计学原理有了一点了解，遂决定记录成文，顺便更新下大半年没动过的博客……<br>
+        <h2 id="引子">引子</h2>
+<p>最近做了一个 A/B 测试相关的项目，填补了这部分知识的空白。以前只知道 A/B 测试的大概机制，对原理并没有什么了解，通过这个项目，对 A/B 测试的统计学原理有了一点了解，遂决定记录成文，顺便更新下大半年没动过的博客……
         
         
         <p class="article-more-link">
@@ -157,15 +158,10 @@
 </header>
     <div class="article-content">
         
-        <h2 id="前言">前言</h2><p>MySQL Replication 可以将 master 节点的所有改变准确的复制到 slave 节点，按照复制方式可以分为 statement-based replication 和 row-based replication。</p>
+        <h2 id="前言">前言</h2>
+<p>MySQL Replication 可以将 master 节点的所有改变准确的复制到 slave 节点，按照复制方式可以分为 statement-based replication 和 row-based replication。</p>
 <!-- statement-based replication 是基于statement的复制，在语句少，数据变更大的时候效果更好，row-based replication 是基于数据行的复制，在语句多，数据变更相对少的时候效果更好。 -->
-<p>Replication 作用：</p>
-<ul>
-<li>异地多活</li>
-<li>水平扩展，负载均衡</li>
-<li>使用 slave 节点进行备份、数据分析等</li>
-<li>配置 delayed slave，避免误操作的影响</li>
-</ul>
+<p>Replication 作用： - 异地多活 - 水平扩展，负载均衡 - 使用 slave 节点进行备份、数据分析等 - 配置 delayed slave，避免误操作的影响</p>
         
         
         <p class="article-more-link">
@@ -229,7 +225,8 @@
 </header>
     <div class="article-content">
         
-        <h2 id="牢骚">牢骚</h2><p>一晃已经2016年了，又有很长时间没写博客了。</p>
+        <h2 id="牢骚">牢骚</h2>
+<p>一晃已经2016年了，又有很长时间没写博客了。</p>
         
         
         <p class="article-more-link">
@@ -288,7 +285,8 @@
 </header>
     <div class="article-content">
         
-        <h2 id="初识">初识</h2><p>之前有个项目想做用户自定义规则的定时任务，类似于Crontab的效果。当时调研了一下，基于JAVA的开源作业调度框架Quartz可能是技术和文档最成熟的选择。最近项目中用到了Quartz，所以看了下文档，简单学习了Quartz的部署和开发。</p>
+        <h2 id="初识">初识</h2>
+<p>之前有个项目想做用户自定义规则的定时任务，类似于Crontab的效果。当时调研了一下，基于JAVA的开源作业调度框架Quartz可能是技术和文档最成熟的选择。最近项目中用到了Quartz，所以看了下文档，简单学习了Quartz的部署和开发。</p>
         
         
         <p class="article-more-link">
@@ -352,7 +350,8 @@
 </header>
     <div class="article-content">
         
-        <h2 id="项目结构">项目结构</h2><p>在设计命令行参数之前，我先折腾了一番项目结构。因为是第一次做GO的项目，所以对build方式不太熟悉，只是知道main包会生成可执行程序，其他的包会生成库。这样的结构对一个只有一个可执行程序的项目来说已经足够了，但是我希望在taskgo的项目中包含server、worker、client三种可执行程序，就需要调整一下项目结构。</p>
+        <h2 id="项目结构">项目结构</h2>
+<p>在设计命令行参数之前，我先折腾了一番项目结构。因为是第一次做GO的项目，所以对build方式不太熟悉，只是知道main包会生成可执行程序，其他的包会生成库。这样的结构对一个只有一个可执行程序的项目来说已经足够了，但是我希望在taskgo的项目中包含server、worker、client三种可执行程序，就需要调整一下项目结构。</p>
         
         
         <p class="article-more-link">
@@ -416,7 +415,8 @@
 </header>
     <div class="article-content">
         
-        <h2 id="缘起">缘起</h2><p>目前在做一个比较独立的项目模块，有了一定的时间和自主性，所以针对目前项目开发过程中的弊端，我尝试使用一些增加对代码掌控能力的工具。</p>
+        <h2 id="缘起">缘起</h2>
+<p>目前在做一个比较独立的项目模块，有了一定的时间和自主性，所以针对目前项目开发过程中的弊端，我尝试使用一些增加对代码掌控能力的工具。</p>
         
         
         <p class="article-more-link">
@@ -544,7 +544,8 @@
 </header>
     <div class="article-content">
         
-        <h2 id="起">起</h2><p>这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。</p>
+        <h2 id="起">起</h2>
+<p>这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。</p>
         
         
         <p class="article-more-link">
@@ -608,7 +609,8 @@
 </header>
     <div class="article-content">
         
-        <h2 id="缘起">缘起</h2><p>很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。</p>
+        <h2 id="缘起">缘起</h2>
+<p>很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。</p>
         
         
         <p class="article-more-link">
@@ -672,8 +674,9 @@
 </header>
     <div class="article-content">
         
-        <h2 id="前言">前言</h2><p>很早之前读过 Matrix67的<a href="http://www.matrix67.com/blog/archives/234">素数与素性测试</a>和 张洋的<a href="http://blog.codinglabs.org/articles/prime-test.html">聊聊如何检测素数</a>，读了之后获益匪浅，不过一直没有自己动手写一次试试。</p>
-<p>最近和朋友聊天，谈到如何找到距离某个数最近的素数，勾起了我的兴趣。遂重新读了这两篇博客，又查阅了一些其他的资料，自己动手写了一个简单的素数检测程序。下面记录了一些这次实践的经历以及脑洞。<br>
+        <h2 id="前言">前言</h2>
+<p>很早之前读过 Matrix67的<a href="http://www.matrix67.com/blog/archives/234">素数与素性测试</a>和 张洋的<a href="http://blog.codinglabs.org/articles/prime-test.html">聊聊如何检测素数</a>，读了之后获益匪浅，不过一直没有自己动手写一次试试。</p>
+<p>最近和朋友聊天，谈到如何找到距离某个数最近的素数，勾起了我的兴趣。遂重新读了这两篇博客，又查阅了一些其他的资料，自己动手写了一个简单的素数检测程序。下面记录了一些这次实践的经历以及脑洞。
         
         
         <p class="article-more-link">
