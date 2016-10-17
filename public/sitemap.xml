@@ -3,16 +3,16 @@
   
   <url>
     <loc>http://solnotes.com/2016/10/08/simple-stats-in-abtesting/</loc>
-    <lastmod>2016-10-12T12:34:37.156Z</lastmod>
+    <lastmod>2016-10-13T02:43:17.300Z</lastmod>
   </url>
   
   <url>
-    <loc>http://solnotes.com/2016/02/19/mysql-high-availability-notes-1/</loc>
-    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
+    <loc>http://solnotes.com/2015/05/04/svn-workflow-management/</loc>
+    <lastmod>2016-10-09T08:14:51.529Z</lastmod>
   </url>
   
   <url>
-    <loc>http://solnotes.com/2015/10/23/taskgo-dev-note-1/</loc>
+    <loc>http://solnotes.com/2015/04/21/prime-test/</loc>
     <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
@@ -22,7 +22,7 @@
   </url>
   
   <url>
-    <loc>http://solnotes.com/2015/05/04/svn-workflow-management/</loc>
+    <loc>http://solnotes.com/2015/09/24/use-composer-and-monolog-in-project/</loc>
     <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
@@ -32,12 +32,17 @@
   </url>
   
   <url>
-    <loc>http://solnotes.com/2015/04/21/prime-test/</loc>
+    <loc>http://solnotes.com/2015/10/23/taskgo-dev-note-1/</loc>
     <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://solnotes.com/2015/07/22/tmux-install-and-config/</loc>
+    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://solnotes.com/2016/02/19/mysql-high-availability-notes-1/</loc>
     <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   
@@ -48,11 +53,6 @@
   
   <url>
     <loc>http://solnotes.com/2015/04/14/hello-world/</loc>
-    <lastmod>2016-06-24T09:34:30.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://solnotes.com/2015/09/24/use-composer-and-monolog-in-project/</loc>
     <lastmod>2016-06-24T09:34:30.000Z</lastmod>
   </url>
   

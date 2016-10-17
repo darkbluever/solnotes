@@ -4,7 +4,7 @@
   <subtitle><![CDATA[但行善事，莫问前程]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://solnotes.com/"/>
-  <updated>2016-10-12T12:34:37.156Z</updated>
+  <updated>2016-10-13T02:43:17.300Z</updated>
   <id>http://solnotes.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://solnotes.com/2016/10/08/simple-stats-in-abtesting/"/>
     <id>http://solnotes.com/2016/10/08/simple-stats-in-abtesting/</id>
     <published>2016-10-08T08:16:53.000Z</published>
-    <updated>2016-10-12T12:34:37.156Z</updated>
+    <updated>2016-10-13T02:43:17.300Z</updated>
     <content type="html"><![CDATA[<h2 id="引子">引子</h2>
 <p>最近做了一个 A/B 测试相关的项目，填补了这部分知识的空白。以前只知道 A/B 测试的大概机制，对原理并没有什么了解，通过这个项目，对 A/B 测试的统计学原理有了一点了解，遂决定记录成文，顺便更新下大半年没动过的博客…… <a id="more"></a></p>
 <h2 id="ab-testing">A/B testing</h2>
@@ -397,7 +397,7 @@
     <link href="http://solnotes.com/2015/05/04/svn-workflow-management/"/>
     <id>http://solnotes.com/2015/05/04/svn-workflow-management/</id>
     <published>2015-05-04T08:42:51.000Z</published>
-    <updated>2016-06-24T09:34:30.000Z</updated>
+    <updated>2016-10-09T08:14:51.529Z</updated>
     <content type="html"><![CDATA[<h2 id="起">起</h2>
 <p>这篇博客起源于一次发布事故的反思。五一之前因为修复一个线上bug，紧急发布了一个补丁，结果发布的代码中包含了正在开发中的新功能的代码，导致了线上部分功能受影响，服务出错不可用。</p>
 <a id="more"></a>
