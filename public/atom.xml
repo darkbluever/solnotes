@@ -4,7 +4,7 @@
   <subtitle><![CDATA[但行善事，莫问前程]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://solnotes.com/"/>
-  <updated>2016-10-13T02:43:17.300Z</updated>
+  <updated>2016-10-19T10:27:55.161Z</updated>
   <id>http://solnotes.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://solnotes.com/2016/10/08/simple-stats-in-abtesting/"/>
     <id>http://solnotes.com/2016/10/08/simple-stats-in-abtesting/</id>
     <published>2016-10-08T08:16:53.000Z</published>
-    <updated>2016-10-13T02:43:17.300Z</updated>
+    <updated>2016-10-19T10:27:55.161Z</updated>
     <content type="html"><![CDATA[<h2 id="引子">引子</h2>
 <p>最近做了一个 A/B 测试相关的项目，填补了这部分知识的空白。以前只知道 A/B 测试的大概机制，对原理并没有什么了解，通过这个项目，对 A/B 测试的统计学原理有了一点了解，遂决定记录成文，顺便更新下大半年没动过的博客…… <a id="more"></a></p>
 <h2 id="ab-testing">A/B testing</h2>
@@ -114,6 +114,12 @@
 </ul>
 <p>我们实际应用的时候，对比实验组和对照组的统计量差异的时候，符合配对t检验的情况，此时，t统计量的公式为 <span class="math display">\[t = \frac{\bar d - \mu}{\frac{S_d}{\sqrt n}}\]</span></p>
 <p>其中，n是样本数量，n-1是自由度，<span class="math inline">\(d_i = x_{1i} - x_{2i}\)</span> 是样本元素，<span class="math inline">\(\bar d = \frac{\sum_{i=0}^n d_i}{n}\)</span> 是样本均值，<span class="math inline">\(S_d = \sqrt{\frac{\sum_{i=0}^n (d_i - \bar d)^2}{n-1}}\)</span> 是样本标准差。</p>
+<h3 id="p-value">p-value</h3>
+<p>在假设检验的过程中，我们经常听到 p 值这个名词，它的含义是：在原假设成立的条件下，我们观察到计算所得样本数据特征的概率，通常将 p 值和显著性水平进行比较以判断是否拒绝原假设。如果 p 值小于显著性水平，说明我们在原假设的条件下几乎不会得到这样的数据，所以我们应该拒绝原假设。</p>
+<div class="figure">
+<img src="http://7xiium.com1.z0.glb.clouddn.com/p-value.png">
+
+</div>
 <h2 id="示例">示例</h2>
 <p>下面我们通过一个例子梳理一下。假设我们设计了一个实验，通过随机抽样选出了样本，经过一段时间的实验，收集到了一批样本的数据。为了比较实验组和对照组的差异，我们首先提出原假设和备择假设：</p>
 <ul>
