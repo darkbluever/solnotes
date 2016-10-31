@@ -4,7 +4,7 @@
   <subtitle><![CDATA[但行善事，莫问前程]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://solnotes.com/"/>
-  <updated>2016-10-19T10:27:55.161Z</updated>
+  <updated>2016-10-31T08:25:18.473Z</updated>
   <id>http://solnotes.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://solnotes.com/2016/10/08/simple-stats-in-abtesting/"/>
     <id>http://solnotes.com/2016/10/08/simple-stats-in-abtesting/</id>
     <published>2016-10-08T08:16:53.000Z</published>
-    <updated>2016-10-19T10:27:55.161Z</updated>
+    <updated>2016-10-31T08:25:18.473Z</updated>
     <content type="html"><![CDATA[<h2 id="引子">引子</h2>
 <p>最近做了一个 A/B 测试相关的项目，填补了这部分知识的空白。以前只知道 A/B 测试的大概机制，对原理并没有什么了解，通过这个项目，对 A/B 测试的统计学原理有了一点了解，遂决定记录成文，顺便更新下大半年没动过的博客…… <a id="more"></a></p>
 <h2 id="ab-testing">A/B testing</h2>
@@ -37,7 +37,7 @@
 <h2 id="统计量及其分布">统计量及其分布</h2>
 <p>在选择完抽样方法后，还需要选择适当的统计指标来评估对照组和实验组的表现。通常，我们选择的都是一维连续随机变量，例如pv、uv、点击率等，随机变量的分布函数描述了随机变量的概率分布的情况。我们实际常用的分布主要是正态分布和t分布。</p>
 <h3 id="正态分布">正态分布</h3>
-<p>正态分布是一种应用非常广泛的概率分布，正态分布的密度曲线是一条关于 <span class="math inline">\(x = \mu\)</span> 对称的钟形曲线，方差 <span class="math inline">\(\sigma ^{2}\)</span> 决定了曲线中峰的陡峭程度。其中，<span class="math inline">\(\mu\)</span> 是正态分布的数学期望，<span class="math inline">\(\sigma\)</span> 是正态分布的方差，正态分布记为 <span class="math inline">\(X \sim N(\mu,\sigma ^ {2})\)</span>。<span class="math inline">\(\mu = 0\)</span> 且 <span class="math inline">\(\sigma = 1\)</span> 时的正态分布称为标准正态分布，记为 <span class="math inline">\(X \sim N(0,1)\)</span>。</p>
+<p>正态分布是一种应用非常广泛的概率分布，正态分布的密度曲线是一条关于 <span class="math inline">\(x = \mu\)</span> 对称的钟形曲线，方差 <span class="math inline">\(\sigma ^{2}\)</span> 决定了曲线中峰的陡峭程度。其中，<span class="math inline">\(\mu\)</span> 是正态分布的数学期望，<span class="math inline">\(\sigma ^{2}\)</span> 是正态分布的方差，正态分布记为 <span class="math inline">\(X \sim N(\mu,\sigma ^ {2})\)</span>。<span class="math inline">\(\mu = 0\)</span> 且 <span class="math inline">\(\sigma ^{2} = 1\)</span> 时的正态分布称为标准正态分布，记为 <span class="math inline">\(X \sim N(0,1)\)</span>。</p>
 <div class="figure">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Normal_Distribution_PDF.svg/350px-Normal_Distribution_PDF.svg.png" title="normal distribution">
 
