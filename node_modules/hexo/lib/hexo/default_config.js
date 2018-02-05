@@ -34,8 +34,9 @@ module.exports = {
   future: true,
   highlight: {
     enable: true,
+    auto_detect: false,
     line_number: true,
-    tab_replace: '',
+    tab_replace: ''
   },
   // Category & Tag
   default_category: 'uncategorized',
@@ -50,5 +51,9 @@ module.exports = {
   // Extensions
   theme: 'landscape',
   // Deployment
-  deploy: {}
+  deploy: {},
+
+  // ignore files from processing
+  ignore: []
 };
+
