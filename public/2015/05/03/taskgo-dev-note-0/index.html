@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="缘起
-很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
+    <meta name="description" content="缘起很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
+<meta name="keywords" content="golang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="taskgo开发手册 -0- origin">
 <meta property="og:url" content="http://solnotes.com/2015/05/03/taskgo-dev-note-0/index.html">
-<meta property="og:site_name" content="sol's notes">
-<meta property="og:description" content="缘起
-很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
+<meta property="og:site_name" content="sol&#39;s notes">
+<meta property="og:description" content="缘起很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-29T07:06:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="taskgo开发手册 -0- origin">
-<meta name="twitter:description" content="缘起
-很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
+<meta name="twitter:description" content="缘起很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。">
 <meta name="twitter:creator" content="@darkbluever">
 
     
@@ -35,7 +35,7 @@
     <link rel="apple-touch-icon" href="/img/apple.jpeg">
     <link rel="apple-touch-icon-precomposed" href="/img/apple.jpeg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -101,15 +101,26 @@
 		
 		</div>
 		
-		<h2 id="缘起">缘起</h2>
-<p>很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。</p>
+		<h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>很早以前就听过Go，不过一直没有接触过。最近我听了一次Go实践的分享，发现Go做偏底层的开发也很适合，比C/C++更简单易用，性能损失也不大，于是决定补一下自己的短板，用Go写一个软件。经过一番考虑，我决定用Go仿写Gearman。所以就有了这个taskgo开发手册系列。</p>
 <a id="more"></a>
-<h2 id="思路">思路</h2>
-<p>之所以选择仿写Gearman，一方面是觉得这个软件涵盖了我想练习的几个方面，包括类似master-slave的拓扑结构维护、消息队列、数据持久化、多语言兼容协议等。另一方面也觉得这个软件的核心功能实现起来应该不太难，比较适合上手，而如果完成了基本的功能，又有可扩展的空间。</p>
-<p>根据我现在的设想，taskgo的基本功能如下： - 单task server，多task worker模式 - task server 维护单任务队列</p>
-<p>扩展功能可能包括： - 多task server，多task server模式 - 多任务队列 - 多种优先级 - 数据持久化 - 外部产品数据持久化支持（例如redis，mysql） - 二进制日志、故障恢复 - task monitor（task server 和 task worker状态监控） - 其他后续补充</p>
-<h2 id="启航">启航</h2>
-<p>虽然这可能是一个很漫长的过程，但是我希望可以一边开发一边学习，最终把这篇博客挖出来的坑填上。希望在这个过程中有所收获，一路坚持下去！ #2015 我的Go语言之旅#</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>之所以选择仿写Gearman，一方面是觉得这个软件涵盖了我想练习的几个方面，包括类似master-slave的拓扑结构维护、消息队列、数据持久化、多语言兼容协议等。另一方面也觉得这个软件的核心功能实现起来应该不太难，比较适合上手，而如果完成了基本的功能，又有可扩展的空间。</p>
+<p>根据我现在的设想，taskgo的基本功能如下：</p>
+<ul>
+<li>单task server，多task worker模式</li>
+<li>task server 维护单任务队列</li>
+</ul>
+<p>扩展功能可能包括：</p>
+<ul>
+<li>多task server，多task server模式</li>
+<li>多任务队列</li>
+<li>多种优先级</li>
+<li>数据持久化</li>
+<li>外部产品数据持久化支持（例如redis，mysql）</li>
+<li>二进制日志、故障恢复</li>
+<li>task monitor（task server 和 task worker状态监控）</li>
+<li>其他后续补充</li>
+</ul>
+<h2 id="启航"><a href="#启航" class="headerlink" title="启航"></a>启航</h2><p>虽然这可能是一个很漫长的过程，但是我希望可以一边开发一边学习，最终把这篇博客挖出来的坑填上。希望在这个过程中有所收获，一路坚持下去！<br>#2015 我的Go语言之旅#</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -132,7 +143,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://solnotes.com/2015/05/03/taskgo-dev-note-0/" data-title="taskgo开发手册 -0- origin | sol&#39;s notes" data-tsina="null" class="share clearfix">
+	  <div data-url="http://solnotes.com/2015/05/03/taskgo-dev-note-0/" data-title="taskgo开发手册 -0- origin | sol&#39;s notes" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -187,53 +198,56 @@
 <aside class="clearfix">
 
   
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/Life/" title="Life">Life<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/study/" title="study">study<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/工程/" title="工程">工程<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/开发手册/" title="开发手册">开发手册<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数学/" title="数学">数学<sup>2</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
 <div class="tagslist">
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/golang/" title="golang">golang<sup>2</sup></a></li>
-			
 		
 			
 				<li><a href="/tags/数学/" title="数学">数学<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/A-B-testing/" title="A/B testing">A/B testing<sup>1</sup></a></li>
+				<li><a href="/tags/golang/" title="golang">golang<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/composer/" title="composer">composer<sup>1</sup></a></li>
+				<li><a href="/tags/统计学/" title="统计学">统计学<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/monolog/" title="monolog">monolog<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/druid-sql/" title="druid sql">druid sql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/druid/" title="druid">druid<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql-replication/" title="mysql replication">mysql replication<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Quartz/" title="Quartz">Quartz<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/素数/" title="素数">素数<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/A-B-testing/" title="A/B testing">A/B testing<sup>1</sup></a></li>
 			
 		
 			
@@ -249,35 +263,11 @@
 			
 		
 			
-				<li><a href="/tags/统计学/" title="统计学">统计学<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/tools/" title="tools">tools<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/monolog/" title="monolog">monolog<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/素数/" title="素数">素数<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/mysql-replication/" title="mysql replication">mysql replication<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Quartz/" title="Quartz">Quartz<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+				<li><a href="/tags/composer/" title="composer">composer<sup>1</sup></a></li>
 			
 		
 			
@@ -298,7 +288,7 @@
   <div class="tagcloudlist">
     <p class="asidetitle">标签云</p>
     <div class="tagcloudlist clearfix">
-       <a href="/tags/A-B-testing/" style="font-size: 10px;">A/B testing</a><a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a><a href="/tags/composer/" style="font-size: 10px;">composer</a><a href="/tags/git/" style="font-size: 10px;">git</a><a href="/tags/golang/" style="font-size: 20px;">golang</a><a href="/tags/hello-world/" style="font-size: 10px;">hello world</a><a href="/tags/monolog/" style="font-size: 10px;">monolog</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/mysql-replication/" style="font-size: 10px;">mysql replication</a><a href="/tags/svn/" style="font-size: 10px;">svn</a><a href="/tags/tools/" style="font-size: 10px;">tools</a><a href="/tags/工程/" style="font-size: 10px;">工程</a><a href="/tags/数学/" style="font-size: 20px;">数学</a><a href="/tags/素数/" style="font-size: 10px;">素数</a><a href="/tags/统计学/" style="font-size: 10px;">统计学</a>
+       <a href="/tags/A-B-testing/" style="font-size: 10px;">A/B testing</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/composer/" style="font-size: 10px;">composer</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/druid-sql/" style="font-size: 10px;">druid sql</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/golang/" style="font-size: 20px;">golang</a> <a href="/tags/hello-world/" style="font-size: 10px;">hello world</a> <a href="/tags/monolog/" style="font-size: 10px;">monolog</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/mysql-replication/" style="font-size: 10px;">mysql replication</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/工程/" style="font-size: 10px;">工程</a> <a href="/tags/数学/" style="font-size: 20px;">数学</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/统计学/" style="font-size: 10px;">统计学</a>
     </div>
   </div>
 
@@ -341,7 +331,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
 		<a href="/about" target="_blank" title="sol_catdog">sol_catdog</a>
 		

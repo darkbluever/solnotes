@@ -89,3 +89,5 @@ deploy:
   repository: git@github.com:darkbluever/darkbluever.github.io.git
   #repository: https://github.com/darkbluever/darkbluever.github.io.git
   branch: master
+  email: darkbluever@gmail.com
+  name: sol
